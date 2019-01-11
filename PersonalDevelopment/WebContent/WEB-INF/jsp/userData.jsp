@@ -36,6 +36,11 @@
 		<div class="row center">
 			<h5 class="text-center col s12 light m-5">ユーザー情報</h5>
 		</div>
+		<c:if test="${errMsg != null}" >
+			<div class="row center">
+				<h5 class="text-center text-danger col s12 light m-5">${errMsg}</h5>
+			</div>
+		</c:if>
 		<div class="row">
 			<div class="section"></div>
 			<div class="col-md-6 offset-md-3">
@@ -62,17 +67,17 @@
 							</div>
 							<div class="row">
 								<div class="input-field col s10 offset-s1 mb-3">
-									<input value="${udbAll.adress}" name="address" type="text" placeholder="住所" required>
+									<input value="${udbAll.adress}" name="adress" type="text" placeholder="住所" required>
 								</div>
 							</div>
 							<div class="row">
 								<div class="input-field col s10 offset-s1 mb-3">
-									<input value="" name="password" type="text" placeholder="パスワード" required>
+									<input value="" name="password" type="password" placeholder="パスワード" required>
 								</div>
 							</div>
 							<div class="row">
 								<div class="input-field col s10 offset-s1 mb-3">
-									<input value="" name="passwordConfirm" type="text" placeholder="パスワード（確認用）" required>
+									<input value="" name="passwordConfirmation" type="password" placeholder="パスワード（確認用）" required>
 								</div>
 							</div>
 							<div class="row">

@@ -66,6 +66,7 @@ public class UserData extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("utf-8");
 
 		String userId1 = request.getParameter("userId");
 		int userId = Integer.parseInt(userId1);
@@ -73,13 +74,22 @@ public class UserData extends HttpServlet {
 		String adress = request.getParameter("adress");
 		String password = request.getParameter("password");
 		//パスが確認用と一致するか確認する際に使用
-		String passwordConfirm = request.getParameter("passwordConfirm");
+		String passwordConfirmation = request.getParameter("passwordConfirmation");
+
+		//パスワードとパスワード（確認）が一致しなかった時
+		if(!(password.equals(passwordConfirmation))) {
+			request.setAttribute("errMsg", "入力された内容は正しくありません。");
+
+		//UserDataにフォワード
+			doGet(request, response);
+			return;
+		}
 
 		UserDAO userDao = new UserDAO();
 		userDao.userUpDate(userId, userName, adress, password);
 
 //		UserData（ユーザー情報）にリダイレクト
-		response.sendRedirect("http://localhost:8080/PersonalDevelopment/UserData");
+		doGet(request, response);
 
 	}
 

@@ -75,7 +75,7 @@ public class UserDAO {
 			ResultSet rs = pStmt.executeQuery();
 
 			//結果表に格納されたレコードの内容をwhileを回してそれぞれ変数に入れていく
-			//getI~の中身はカラム名
+			//get~の中身はカラム名
 			//これは1人分なのでif文でもいい
 			while(rs.next()){
 				int userId = rs.getInt("user_id");
@@ -129,14 +129,12 @@ public class UserDAO {
 			e.printStackTrace();
 		}finally{
 			//データベースを切断する
-			//finallyは例外をキャッチした場合もしてない場合も必ず実行する
 			if(conn != null) {
 				try {
 					conn.close();
 				} catch (SQLException e) {
 					// TODO: handle exception
 					e.printStackTrace();
-					return;
 				}
 			}
 		}
