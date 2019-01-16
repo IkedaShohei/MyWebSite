@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.UserDataBeans;
+
 /**
  * Servlet implementation class Regist
  */
@@ -41,7 +43,41 @@ public class Regist extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		request.setCharacterEncoding("utf-8");
+
+		String userName = request.getParameter("user_name");
+		String userAddress = request.getParameter("user_address");
+		String password = request.getParameter("password");
+		//確認用パスワード
+		String confirmPassword = request.getParameter("confirm_password");
+
+		//パスワードとパスワード（確認）が一致しなかった時
+				if(!(password.equals(confirmPassword))) {
+					request.setAttribute("errMsg", "入力された内容は正しくありません。");
+
+					request.setAttribute("userName", userName);
+					request.setAttribute("userAddress", userAddress);
+
+				//自分のGetにフォワード
+					doGet(request, response);
+					return;
+				}
+
+		//どれか１つでも入力欄が空だった場合
+				if(userName.equals("") || userAddress.equals("") || password.equals("") || confirmPassword.equals("")) {
+					request.setAttribute("errMsg", "入力された内容は正しくありません。");
+
+					/**newSighUpServletMyself.jspにフォワード**/
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/newSighUpMyself.jsp");
+					dispatcher.forward(request, response);
+					return;
+				}
+
+		UserDataBeans udb = new UserDataBeans(userName, userAddress, password);
+		request.setAttribute("udb", udb);
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registConfirm.jsp");
+		dispatcher.forward(request, response);
 	}
 
 }

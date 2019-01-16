@@ -1,15 +1,9 @@
 package dao;
 
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import javax.xml.bind.DatatypeConverter;
 
 import base.DBmanager;
 import beans.UserDataBeans;
@@ -20,15 +14,19 @@ public class UserDAO {
 	public UserDataBeans loginByLIAndPWGetIDAndName(String loginId, String password){
 		Connection conn = null;
 
+		//確認用
+		System.out.println(loginId);
+		System.out.println(password);
+
 		try {
 		conn = DBmanager.getConnection();
 
 		String sql = "SELECT * FROM user WHERE login_id = ? and login_password = ?";
 
-			String passwordCode = encryption(password);
+//			String passwordCode = encryption(password);
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, loginId);
-			ps.setString(2, passwordCode);
+			ps.setString(2, password);
 			ResultSet rs = ps.executeQuery();
 
 			if (!rs.next()) {
@@ -108,21 +106,22 @@ public class UserDAO {
 		return udb;
 		}
 
-	public void userUpDate(int userId,String userName,String adress,String password) {
+	public int userUpDate(String loginId,String userName,String adress,String password) {
 		Connection conn = null;
+		int result = 0;
 
 		try {
 		conn = DBmanager.getConnection();
 
-		String sql = "UPDATE user SET name =?,adress = ?,login_password = ? WHERE user_id = ?";
+		String sql = "UPDATE user SET name =?,adress = ?,login_password = ? WHERE login_id = ?";
 
-		String passwordCode = encryption(password);
+//		String passwordCode = encryption(password);
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1, userName);
 		ps.setString(2, adress);
-		ps.setString(3, passwordCode);
-		ps.setInt(4, userId);
-		ps.executeUpdate();
+		ps.setString(3, password);
+		ps.setString(4, loginId);
+		result = ps.executeUpdate();
 
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
@@ -138,6 +137,45 @@ public class UserDAO {
 				}
 			}
 		}
+		return result ;
+	}
+
+	public int regist(String name,String adress,String password) {
+		Connection conn =null;
+		int result = 0;
+
+		try {
+			conn = DBmanager.getConnection();
+
+			String sql = "INSERT INTO user (name, adress, login_password, create_date, update_date)VALUES (?, ?, ?,now(), now())";
+
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, name);
+			ps.setString(2, adress);
+			ps.setString(3, password);
+
+			result = ps.executeUpdate();
+
+
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}finally{
+			//データベースを切断する
+			if(conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO: handle exception
+					e.printStackTrace();
+				}
+			}
+		}
+
+
+		return result;
+
 	}
 
 //	暗号化するメソッド
@@ -145,26 +183,26 @@ public class UserDAO {
 //	・それを登録、更新、ログインの際に呼び出してからそれぞれのメソッドを呼び出す。
 //	 @throws NoSuchAlgorithmException
 
-	public String encryption(String password){
-		//ハッシュを生成したい元の文字列
-		String source = password;
-		//ハッシュ生成前にバイト配列に置き換える際のCharset
-		Charset charset = StandardCharsets.UTF_8;
-		//ハッシュアルゴリズム
-		String algorithm = "MD5";
-
-		//ハッシュ生成処理
-		byte[] bytes = null;
-		try {
-			bytes = MessageDigest.getInstance(algorithm).digest(source.getBytes(charset));
-		} catch (NoSuchAlgorithmException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
-		String result = DatatypeConverter.printHexBinary(bytes);
-		System.out.println(result);
-
-		return result;
-
-	}
+//	public String encryption(String password){
+//		//ハッシュを生成したい元の文字列
+//		String source = password;
+//		//ハッシュ生成前にバイト配列に置き換える際のCharset
+//		Charset charset = StandardCharsets.UTF_8;
+//		//ハッシュアルゴリズム
+//		String algorithm = "MD5";
+//
+//		//ハッシュ生成処理
+//		byte[] bytes = null;
+//		try {
+//			bytes = MessageDigest.getInstance(algorithm).digest(source.getBytes(charset));
+//		} catch (NoSuchAlgorithmException e) {
+//			// TODO 自動生成された catch ブロック
+//			e.printStackTrace();
+//		}
+//		String result = DatatypeConverter.printHexBinary(bytes);
+//		System.out.println(result);
+//
+//		return result;
+//
+//	}
 }

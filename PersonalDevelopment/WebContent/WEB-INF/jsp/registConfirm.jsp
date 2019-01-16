@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,23 +9,30 @@
 <title>入力内容確認</title>
 </head>
 <body>
-
-
 	<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
 		<div class="container">
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<div class="mr-auto">
-					<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+					<a class="nav-link" href="http://localhost:8080/PersonalDevelopment/index">Home </a>
 				</div>
 				<ul class="navbar-nav">
+					<c:choose>
+						<c:when test="${udb == null}">
+							<li class="nav-item">
+				        		<a class="nav-link" href="http://localhost:8080/PersonalDevelopment/Regist">新規登録</a>
+				      		</li>
+				      	</c:when>
+				      	<c:when test="${udb != null}">
+				      		<li class="nav-item">
+				        		<a class="nav-link" href="http://localhost:8080/PersonalDevelopment/UserData?userId=${udb.userId}">${udb.name}さん</a>
+				      		</li>
+				      	</c:when>
+					</c:choose>
 		      		<li class="nav-item">
-		        		<a class="nav-link" href="#">新規登録</a>
+		        		<a class="nav-link" href="http://localhost:8080/PersonalDevelopment/Cart">カート</a>
 		      		</li>
 		      		<li class="nav-item">
-		        		<a class="nav-link" href="#">カート</a>
-		      		</li>
-		      		<li class="nav-item">
-		        		<a class="nav-link" href="#">ログイン</a>
+		        		<a class="nav-link" href="http://localhost:8080/PersonalDevelopment/Login">ログイン</a>
 		      		</li>
 		    	</ul>
 		    </div>
@@ -41,23 +50,19 @@
 					<div class="card-body text-center">
 						<form action="" method="POST">
 								<div class="row">
-									<div class="input-field col s10 offset-s1 mb-3">
-										<input value="" name="user_name" type="text" placeholder="名前" required>
+									<div class="col">
+										<p>名前</p>
+									</div>
+									<div class="col">
+										<span>${udb.name}</span>
 									</div>
 								</div>
 								<div class="row">
-									<div class="input-field col s10 offset-s1 mb-3">
-										<input value="${udb.address}" name="user_address" type="text" placeholder="住所" required>
+									<div class="col">
+										<p>住所</p>
 									</div>
-								</div>
-								<div class="row">
-										<div class="input-field col s10 offset-s1 mb-3">
-											<input value="${udb.loginId}" name="login_id" type="text" placeholder="ログインID" required>
-										</div>
-								</div>
-								<div class="row">
-									<div class="input-field col s10 offset-s1 mb-3">
-										<input  name="password" type="password" placeholder="パスワード" required>
+									<div class="col">
+										<span>${udb.adress}</span>
 									</div>
 								</div>
 								<p class="">上記内容で登録してよろしいでしょうか?</p>

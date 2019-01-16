@@ -15,7 +15,7 @@
 		<div class="container">
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<div class="mr-auto">
-					<a class="nav-link" href="http://localhost:8080/PersonalDevelopment/index">Home <span class="sr-only">(current)</span></a>
+					<a class="nav-link" href="http://localhost:8080/PersonalDevelopment/index">Home </a>
 				</div>
 				<ul class="navbar-nav">
 		      		<li class="nav-item">

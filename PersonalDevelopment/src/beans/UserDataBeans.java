@@ -18,6 +18,21 @@ public class UserDataBeans {
 		this.setName(name);
 	}
 
+	public UserDataBeans(String name,String adress,String password) {
+		this.setName(name);
+		this.setAdress(adress);
+		this.setLoginId(loginId);
+		this.setPassword(password);
+	}
+
+	public UserDataBeans(int userId,String name,String adress,String loginId,String password) {
+		this.setUserId(userId);
+		this.setName(name);
+		this.setAdress(adress);
+		this.setLoginId(loginId);
+		this.setPassword(password);
+	}
+
 	//ユーザー情報の更新や詳細の表示などに使う全情報を取得するコンストラクタ
 	public UserDataBeans(int userId,String name,String adress,String loginId,String password,String createDate,String updateDate) {
 		this.setUserId(userId);

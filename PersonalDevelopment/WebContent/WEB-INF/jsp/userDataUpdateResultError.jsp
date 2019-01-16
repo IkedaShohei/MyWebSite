@@ -6,14 +6,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-<title>削除完了</title>
+<title>情報更新失敗画面</title>
 </head>
 <body>
 	<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
 		<div class="container">
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<div class="mr-auto">
-					<a class="nav-link" href="http://localhost:8080/PersonalDevelopment/index">Home </a>
+					<a class="nav-link" href="http://localhost:8080/PersonalDevelopment/index">Home <span class="sr-only">(current)</span></a>
 				</div>
 				<ul class="navbar-nav">
 					<c:choose>
@@ -39,10 +39,9 @@
 		</div>
  	</nav>
 
-
 	<div class="container">
 		<div class="row center">
-			<h5 class="text-center col s12 light m-5">ユーザー削除完了</h5>
+			<h5 class="text-center col s12 light m-5">ユーザー情報更新失敗</h5>
 		</div>
 
 		<div class="row">
@@ -51,7 +50,7 @@
 			</div>
 			<div class="col s6">
 				<p class="center-align">
-				<button class="btn btn-primary rounded-pill btn-sm  col s8 offset-s2" type="submit" name="action">ユーザー情報へ</button>
+				<a class="btn btn-primary rounded-pill btn-sm  col s8 offset-s2" href="http://localhost:8080/PersonalDevelopment/UserData?userId=${udb.userId}" type="submit" name="action">ユーザー情報へ</a>
 				</p>
 			</div>
 			<div class="col s3">

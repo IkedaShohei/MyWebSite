@@ -1,27 +1,38 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 <title>更新内容確認画面</title>
 </head>
 <body>
-
 	<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
 		<div class="container">
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<div class="mr-auto">
-					<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+					<a class="nav-link" href="http://localhost:8080/PersonalDevelopment/index">Home </a>
 				</div>
 				<ul class="navbar-nav">
+					<c:choose>
+						<c:when test="${udb == null}">
+							<li class="nav-item">
+				        		<a class="nav-link" href="http://localhost:8080/PersonalDevelopment/Regist">新規登録</a>
+				      		</li>
+				      	</c:when>
+				      	<c:when test="${udb != null}">
+				      		<li class="nav-item">
+				        		<a class="nav-link" href="http://localhost:8080/PersonalDevelopment/UserData?userId=${udb.userId}">${udb.name}さん</a>
+				      		</li>
+				      	</c:when>
+					</c:choose>
 		      		<li class="nav-item">
-		        		<a class="nav-link" href="#">新規登録</a>
+		        		<a class="nav-link" href="http://localhost:8080/PersonalDevelopment/Cart">カート</a>
 		      		</li>
 		      		<li class="nav-item">
-		        		<a class="nav-link" href="#">カート</a>
-		      		</li>
-		      		<li class="nav-item">
-		        		<a class="nav-link" href="#">ログイン</a>
+		        		<a class="nav-link" href="http://localhost:8080/PersonalDevelopment/Login">ログイン</a>
 		      		</li>
 		    	</ul>
 		    </div>
@@ -37,35 +48,55 @@
 			<div class="col-md-6 offset-md-3">
 				<div class="card grey">
 					<div class="card-body text-center">
-						<form action="" method="POST">
+						<form action="http://localhost:8080/PersonalDevelopment/UserDataUpdateConfirm" method="POST">
 								<div class="row">
+									<input type="hidden" value="${udb.userId}" name="userId">
 									<div class="input-field col s10 offset-s1 mb-3">
-										<input value="" name="user_name" type="text" placeholder="名前" required>
-									</div>
-								</div>
-								<div class="row">
-									<div class="input-field col s10 offset-s1 mb-3">
-										<input value="${udb.address}" name="user_address" type="text" placeholder="住所" required>
-									</div>
-								</div>
-								<div class="row">
-										<div class="input-field col s10 offset-s1 mb-3">
-											<input value="${udb.loginId}" name="login_id" type="text" placeholder="ログインID" required>
+										<div class="row">
+											<div class="col"></div>
+											<span class="col">ログインID</span>
+											<span class="col">${udb.loginId}</span>
+											<input type="hidden" value="${udb.loginId}" name="loginId">
+											<div class="col"></div>
 										</div>
+									</div>
 								</div>
 								<div class="row">
 									<div class="input-field col s10 offset-s1 mb-3">
-										<input  name="password" type="password" placeholder="パスワード" required>
+										<div class="row">
+											<div class="col"></div>
+											<span class="col">名前</span>
+											<span class="col">${udb.name}</span>
+											<input type="hidden" value="${udb.name}" name="name">
+											<div class="col"></div>
+										</div>
 									</div>
 								</div>
-								<p class="">上記内容で登録してよろしいでしょうか?</p>
+								<div class="row">
+									<div class="input-field col s10 offset-s1 mb-3">
+										<div class="row">
+											<div class="col"></div>
+											<span class="col">住所</span>
+											<span class="col">${udb.adress}</span>
+											<input type="hidden" value="${udb.adress}" name="adress">
+											<div class="col"></div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="input-field col s10 offset-s1 mb-3">
+										<p></p>
+										<input type="hidden" value="${udb.password}" name="password">
+									</div>
+								</div>
+								<p class="">上記内容で更新してよろしいでしょうか?</p>
 								<div class="row">
 									<div class="col s2">
 										<div class="brank"></div>
 									</div>
 									<div class="col s3">
 										<p class="center-align">
-											<button class="btn btn-primary rounded-pill btn-sm  col s8 offset-s2" type="submit" name="action">修正</button>
+											<button class="btn btn-primary rounded-pill btn-sm  col s8 offset-s2" type="submit"  name="submit" value="更新">更新</button>
 										</p>
 									</div>
 									<div class="col s2">
@@ -73,7 +104,7 @@
 									</div>
 									<div class="col s3">
 										<p class="center-align">
-											<button class="btn btn-primary rounded-pill btn-sm  col s8 offset-s2" type="submit" name="action">登録</button>
+											<button class="btn btn-primary rounded-pill btn-sm  col s8 offset-s2" type="submit"  name="submit" value="修正">修正</button>
 										</p>
 									</div>
 									<div class="col s2">

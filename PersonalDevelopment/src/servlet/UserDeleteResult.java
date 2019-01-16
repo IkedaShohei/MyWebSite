@@ -8,22 +8,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import beans.UserDataBeans;
 import dao.UserDAO;
 
 /**
- * Servlet implementation class UserData
+ * Servlet implementation class UserDeleteResult
  */
-@WebServlet("/UserData")
-public class UserData extends HttpServlet {
+@WebServlet("/UserDeleteResult")
+public class UserDeleteResult extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserData() {
+    public UserDeleteResult() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,32 +31,7 @@ public class UserData extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//インスタンスを取得してセッションがあるか比べる準備
-		HttpSession session = request.getSession();
-		//もしセッションがなかったらログイン画面にリダイレクト
-		if(session.getAttribute("udb") == null) {
-			//Loginのサーブレットにリダイレクト
-			response.sendRedirect("http://localhost:8080/PersonalDevelopment/Login");
-			return;
-		}
-
-		// URLからGETパラメータとしてIDを受け取る
-		String id1 = request.getParameter("userId");
-		int id = Integer.parseInt(id1);
-
-		// idを引数にして、idに紐づくユーザ情報を出力する
-		UserDAO userDao = new UserDAO();
-		UserDataBeans udbAll = userDao.getDetailById(id);
-
-		request.setAttribute("udbAll", udbAll);
-
-		//文字化け防止
-		response.setContentType("text/html; charset=UTF-8");
-		//UserData.jspにフォワード
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userData.jsp");
-        dispatcher.forward(request, response);
-
-
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -71,7 +44,6 @@ public class UserData extends HttpServlet {
 		String userId1 = request.getParameter("userId");
 		int userId = Integer.parseInt(userId1);
 		String userName = request.getParameter("user_name");
-		String loginId = request.getParameter("loginId");
 		String adress = request.getParameter("adress");
 		String password = request.getParameter("password");
 		//パスが確認用と一致するか確認する際に使用
@@ -86,13 +58,12 @@ public class UserData extends HttpServlet {
 			return;
 		}
 
-		UserDataBeans udb = new UserDataBeans(userId, userName, adress, loginId, password);
-		request.setAttribute("udb", udb);
+		UserDAO userDao = new UserDAO();
+		//userDao.userUpDate(userId, userName, adress, password);
 
-//		userDataUpdateConfirm.jsp（ユーザー情報更新結果）にフォワード
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userDataUpdateConfirm.jsp");
+//		userDataUpdateResult.jsp（ユーザー情報更新結果）にフォワード
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userDataUpdateResult.jsp");
         dispatcher.forward(request, response);
 	}
-
 
 }
