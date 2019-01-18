@@ -48,13 +48,23 @@
 			<div class="col-md-6 offset-md-3">
 				<div class="card grey">
 					<div class="card-body text-center">
-						<form action="" method="POST">
+						<form action="http://localhost:8080/PersonalDevelopment/RegistConfirm" method="POST">
+								<div class="row">
+									<div class="col">
+										<p>ログインID</p>
+									</div>
+									<div class="col">
+										<span>${udb.loginId}</span>
+										<input type="hidden" value="${udb.loginId}" name="loginId">
+									</div>
+								</div>
 								<div class="row">
 									<div class="col">
 										<p>名前</p>
 									</div>
 									<div class="col">
 										<span>${udb.name}</span>
+										<input type="hidden" value="${udb.name}" name="name">
 									</div>
 								</div>
 								<div class="row">
@@ -63,7 +73,9 @@
 									</div>
 									<div class="col">
 										<span>${udb.adress}</span>
+										<input type="hidden" value="${udb.adress}" name="adress">
 									</div>
+										<input type="hidden" value="${udb.password}" name="password">
 								</div>
 								<p class="">上記内容で登録してよろしいでしょうか?</p>
 								<div class="row">
@@ -72,7 +84,7 @@
 									</div>
 									<div class="col s3">
 										<p class="center-align">
-											<button class="btn btn-primary rounded-pill btn-sm  col s8 offset-s2" type="submit" name="action">修正</button>
+											<button class="btn btn-primary rounded-pill btn-sm  col s8 offset-s2" type="submit" name="submit" value="修正">修正</button>
 										</p>
 									</div>
 									<div class="col s2">
@@ -80,7 +92,7 @@
 									</div>
 									<div class="col s3">
 										<p class="center-align">
-											<button class="btn btn-primary rounded-pill btn-sm  col s8 offset-s2" type="submit" name="action">登録</button>
+											<button class="btn btn-primary rounded-pill btn-sm  col s8 offset-s2" type="submit" name="submit" value="登録">登録</button>
 										</p>
 									</div>
 									<div class="col s2">

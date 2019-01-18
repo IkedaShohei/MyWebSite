@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-<title>入力内容確認</title>
+<title>ユーザー情報登録完了</title>
 </head>
 <body>
 	<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
@@ -39,42 +39,25 @@
 		</div>
  	</nav>
 
- 	<div class="container">
- 		<form action="http://localhost:8080/PersonalDevelopment/itemSearchResult" method="post">
- 			<div class="form-group">
-	   			<label for="exampleInputRetrieval">検索</label>
-	    		<input type="text" class="form-control" name="searchWord" value="${searchWord}" placeholder="検索">
-	    		<small class="text-muted">欲しい商品を検索してください。</small>
-	  		</div>
- 		</form>
-		<div class="center">
-			<h5 class="text-center">検索結果</h5>
-			<p class="text-center">
-				検索結果${itemCount}件
-			</p>
+	<div class="container">
+		<div class="row center">
+			<h5 class="text-center col s12 light m-5">ユーザー情報登録完了</h5>
 		</div>
 
-		<div class="container">
-			<p class="text-center m-xl-5">ここに検索結果を表示</p>
-			<c:if test="${itemList != null}">
-				<div class="card-deck">
-					<c:forEach var="idb" items="${itemList}">
-						<div class="card">
-							<a href="http://localhost:8080/PersonalDevelopment/Item?item_id=${idb.itemId}">
-						    <img class="card-img-top" alt="noimage" src="image/${idb.fileName}">
-						    </a>
-							    <div class="card-body">
-							    	<h5 class="card-title">${idb.name}</h5>
-									<p>${idb.price}円</p>
-							      	<p class="card-text">${idb.detail}</p>
-							    </div>
-						</div>
-					</c:forEach>
-				</div>
-			</c:if>
+		<div class="row">
+			<div class="col s3">
+				<div class="brank"></div>
+			</div>
+			<div class="col s6">
+				<p class="center-align">
+				<a class="btn btn-primary rounded-pill btn-sm  col s8 offset-s2" href="http://localhost:8080/PersonalDevelopment/Login" type="submit" name="action">ログイン画面へ</a>
+				</p>
+			</div>
+			<div class="col s3">
+				<div class="brank"></div>
+			</div>
 		</div>
 	</div>
-
 
 	<footer class="fixed-bottom bg-light">
 	    <div class="container text-center">

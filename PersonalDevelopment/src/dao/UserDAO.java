@@ -106,6 +106,57 @@ public class UserDAO {
 		return udb;
 		}
 
+	public UserDataBeans getDetailByloginId(String loginid){
+		Connection conn = null;
+		UserDataBeans udb = null;
+
+		try {
+			//データベースに接続
+			conn = DBmanager.getConnection();
+
+			//user_idが一致するを条件にSELECT
+			String sql = "SELECT * FROM user WHERE login_id = ?";
+
+			//SELECTを実行して、結果を取得
+			//変数rsに取得した行をexecuteQueryメソッドでセット
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, loginid);
+			ResultSet rs = pStmt.executeQuery();
+
+			//結果表に格納されたレコードの内容をwhileを回してそれぞれ変数に入れていく
+			//get~の中身はカラム名
+			//これは1人分なのでif文でもいい
+			while(rs.next()){
+				int userId = rs.getInt("user_id");
+				String name = rs.getString("name");
+				String adress = rs.getString("adress");
+				String loginId = rs.getString("login_id");
+				String loginPassword = rs.getString("login_password");
+				String createDate = rs.getString("create_date");
+				String updateDate = rs.getString("update_date");
+				//Beansのインスタンスを生成してコンストラクタ発動
+				udb = new UserDataBeans(userId,name,adress,loginId,loginPassword,createDate,updateDate);
+			}
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return null;
+		}finally{
+			//データベースを切断する
+			//finallyは例外をキャッチした場合もしてない場合も必ず実行する
+			if(conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO: handle exception
+					e.printStackTrace();
+					return null;
+				}
+			}
+		}
+		return udb;
+		}
+
 	public int userUpDate(String loginId,String userName,String adress,String password) {
 		Connection conn = null;
 		int result = 0;
@@ -140,20 +191,23 @@ public class UserDAO {
 		return result ;
 	}
 
-	public int regist(String name,String adress,String password) {
+
+
+	public int regist(String name,String adress,String loginId,String password) {
 		Connection conn =null;
 		int result = 0;
 
 		try {
 			conn = DBmanager.getConnection();
 
-			String sql = "INSERT INTO user (name, adress, login_password, create_date, update_date)VALUES (?, ?, ?,now(), now())";
+			String sql = "INSERT INTO user (name, adress, login_id, login_password, create_date, update_date)VALUES ( ?, ?, ?, ?,now(), now())";
 
 
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, name);
 			ps.setString(2, adress);
-			ps.setString(3, password);
+			ps.setString(3, loginId);
+			ps.setString(4, password);
 
 			result = ps.executeUpdate();
 
@@ -172,10 +226,7 @@ public class UserDAO {
 				}
 			}
 		}
-
-
 		return result;
-
 	}
 
 //	暗号化するメソッド

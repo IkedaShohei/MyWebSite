@@ -55,12 +55,9 @@
 					<div class="card-body text-center">
 						<form action="http://localhost:8080/PersonalDevelopment/Regist" method="POST">
 							<div class="row">
-								<div class="col">
-									<p>ログインID</p>
-								<div class="col">
-									<span>${loginId}</span>
+								<div class="input-field col s10 offset-s1 mb-3">
+									<input value="${loginID}" name="loginID" type="text" placeholder="ログインID" required>
 								</div>
-							</div>
 							</div>
 							<div class="row">
 								<div class="input-field col s10 offset-s1 mb-3">

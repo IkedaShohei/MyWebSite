@@ -9,6 +9,14 @@ public class DeliveryMethodDataBeans {
 	private int price;
 
 
+	public DeliveryMethodDataBeans(int deliveryMethodId, String name, int price) {
+		this.setDeliveryMethodId(deliveryMethodId);
+		this.setName(name);
+		this.setPrice(price);
+	}
+
+
+
 	public int getDeliveryMethodId() {
 		return deliveryMethodId;
 	}

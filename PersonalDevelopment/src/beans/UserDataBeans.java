@@ -18,7 +18,7 @@ public class UserDataBeans {
 		this.setName(name);
 	}
 
-	public UserDataBeans(String name,String adress,String password) {
+	public UserDataBeans(String name,String adress,String loginId,String password) {
 		this.setName(name);
 		this.setAdress(adress);
 		this.setLoginId(loginId);

@@ -12,6 +12,20 @@ public class ItemDataBeans {
 	private String fileName;
 	private int userId;
 
+	public ItemDataBeans(int itemId,String name,String detail,int price,int stock,String fileName,int userId) {
+		this.setItemId(itemId);
+		this.setName(name);
+		this.setDetail(detail);
+		this.setPrice(price);
+		this.setStock(stock);
+		this.setFileName(fileName);
+		this.setUserId(userId);
+	}
+
+	public ItemDataBeans() {
+		// TODO 自動生成されたコンストラクター・スタブ
+	}
+
 	public int getItemId() {
 		return itemId;
 	}

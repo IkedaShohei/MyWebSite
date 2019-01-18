@@ -45,6 +45,7 @@ public class Regist extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
 
+		String loginID = request.getParameter("loginID");
 		String userName = request.getParameter("user_name");
 		String userAddress = request.getParameter("user_address");
 		String password = request.getParameter("password");
@@ -55,6 +56,7 @@ public class Regist extends HttpServlet {
 				if(!(password.equals(confirmPassword))) {
 					request.setAttribute("errMsg", "入力された内容は正しくありません。");
 
+					request.setAttribute("loginID", loginID);
 					request.setAttribute("userName", userName);
 					request.setAttribute("userAddress", userAddress);
 
@@ -63,19 +65,24 @@ public class Regist extends HttpServlet {
 					return;
 				}
 
-		//どれか１つでも入力欄が空だった場合
+		//どれか１つでも入力欄が空だった場合(今回はinputにrequiredの属性がついているので使わない)
 				if(userName.equals("") || userAddress.equals("") || password.equals("") || confirmPassword.equals("")) {
 					request.setAttribute("errMsg", "入力された内容は正しくありません。");
 
-					/**newSighUpServletMyself.jspにフォワード**/
-					RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/newSighUpMyself.jsp");
-					dispatcher.forward(request, response);
+					request.setAttribute("loginID", loginID);
+					request.setAttribute("userName", userName);
+					request.setAttribute("userAddress", userAddress);
+
+
+					//自分のGetにフォワード
+					doGet(request, response);
 					return;
 				}
 
-		UserDataBeans udb = new UserDataBeans(userName, userAddress, password);
+		UserDataBeans udb = new UserDataBeans(userName, userAddress, loginID,password);
 		request.setAttribute("udb", udb);
 
+		//registConfirm.jspにフォワード
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registConfirm.jsp");
 		dispatcher.forward(request, response);
 	}
