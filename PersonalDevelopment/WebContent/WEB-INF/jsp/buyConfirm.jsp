@@ -85,7 +85,7 @@
 					</tr>
 			</tbody>
 	  	</table>
-	  	<form action="http://localhost:8080/PersonalDevelopment" method="post">
+	  	<form action="http://localhost:8080/PersonalDevelopment/BuyResult" method="post">
 			<div class="row">
 				<div class="col-sm"></div>
 				<button class="btn-primary rounded-pill col-sm m-5">購入</button>
