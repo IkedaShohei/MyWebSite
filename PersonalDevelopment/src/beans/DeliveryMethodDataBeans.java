@@ -8,13 +8,12 @@ public class DeliveryMethodDataBeans {
 	private String name;
 	private int price;
 
-
+	//全てのデータを持たせるコンストラクタ
 	public DeliveryMethodDataBeans(int deliveryMethodId, String name, int price) {
 		this.setDeliveryMethodId(deliveryMethodId);
 		this.setName(name);
 		this.setPrice(price);
 	}
-
 
 
 	public int getDeliveryMethodId() {

@@ -76,13 +76,25 @@
 							<td class="center"></td>
 							<td class="center"></td>
 							<td class="center">
-								<div class="input-field col s8 offset-s2 ">
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<label class="input-group-text" for="inputGroupSelect01">配送方法</label>
+								</div>
+								<select class="custom-select" name="delivery_method_id">
+									<c:forEach var="dmdb" items="${dmdbList}" >
+								    	<!-- <option selected>配送方法</option> -->
+								    	<option value="${dmdb.deliveryMethodId}">${dmdb.name}　${dmdb.price}円</option>
+									</c:forEach>
+								</select>
+							</div>
+
+							<%-- <div class="input-field col s8 offset-s2 ">
 									<select name="delivery_method_id">
 										<c:forEach var="dmdb" items="${dmdbList}" >
 											<option value="${dmdb.id}">${dmdb.name}</option>
 										</c:forEach>
 									</select> <label>配送方法</label>
-								</div>
+								</div> --%>
 							</td>
 						</tr>
 				</tbody>

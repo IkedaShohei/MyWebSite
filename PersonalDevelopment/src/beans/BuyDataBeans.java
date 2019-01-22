@@ -9,7 +9,7 @@ public class BuyDataBeans {
 	private int buyId;
 	private int userId;
 	private int totalPrice;
-	private int deliveryMethod;
+	private int deliveryMethodId;
 	private Date createDate;
 
 	//あとから持たせたい値が出てきたら足す
@@ -36,12 +36,14 @@ public class BuyDataBeans {
 	public void setTotalPrice(int totalPrice) {
 		this.totalPrice = totalPrice;
 	}
-	public int getDeliveryMethod() {
-		return deliveryMethod;
+
+	public int getDeliveryMethodId() {
+		return deliveryMethodId;
 	}
-	public void setDeliveryMethod(int deliveryMethod) {
-		this.deliveryMethod = deliveryMethod;
+	public void setDeliveryMethodId(int deliveryMethodId) {
+		this.deliveryMethodId = deliveryMethodId;
 	}
+
 	public Date getCreateDate() {
 		return createDate;
 	}

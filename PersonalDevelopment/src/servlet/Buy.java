@@ -42,15 +42,19 @@ public class Buy extends HttpServlet {
 
 		ArrayList<ItemDataBeans> cart = (ArrayList<ItemDataBeans>) session.getAttribute("cart");
 
+		//カートに何も入ってないとき
 		if (cart.size() == 0) {
 			request.setAttribute("cartActionMessage", "購入する商品がありません");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/cart.jsp");
 			dispatcher.forward(request, response);
 		} else {
-			// 配送方法をDBから取得
+			// 配送方法を取得するDAO
 			DeliveryMethodDAO deliveryMethodDao =new DeliveryMethodDAO();
 			ArrayList<DeliveryMethodDataBeans>  dMDBList = deliveryMethodDao.getAllDeliveryMethodDataBeans();
+
+			//配送方法のリストをセット
 			request.setAttribute("dmdbList", dMDBList);
+
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/buy.jsp");
 			dispatcher.forward(request, response);
 		}
