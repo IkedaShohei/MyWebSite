@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import beans.BuyDataBeans;
+import beans.ItemDataBeans;
 import beans.UserDataBeans;
+import dao.BuyDAO;
+import dao.ItemDAO;
 import dao.UserDAO;
 
 /**
@@ -50,10 +55,21 @@ public class UserData extends HttpServlet {
 		UserDAO userDao = new UserDAO();
 		UserDataBeans udbAll = userDao.getDetailById(id);
 
+		//ユーザー情報更新用のスコープ
 		request.setAttribute("udbAll", udbAll);
 
-		//文字化け防止
-		response.setContentType("text/html; charset=UTF-8");
+		//出品情報用のリストを取得する
+		ArrayList<ItemDataBeans> itemDataBeansList = ItemDAO.getitemDataBeansListByUserId(id);
+
+		//購入情報用のリストを取得する
+		ArrayList<BuyDataBeans> buyDataBeansList = BuyDAO.getBuyDataBeansListByUserId(id);
+
+		//出品情報用のスコープ
+		request.setAttribute("itemDataBeansList", itemDataBeansList);
+
+		//購入情報一覧表示用のスコープ
+		request.setAttribute("buyDataBeansList", buyDataBeansList);
+
 		//UserData.jspにフォワード
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userData.jsp");
         dispatcher.forward(request, response);

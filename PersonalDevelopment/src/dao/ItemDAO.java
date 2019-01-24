@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import base.DBmanager;
@@ -40,6 +41,7 @@ public class ItemDAO {
 				String fileName = rs.getString("file_name");
 				int userId = rs.getInt("add_user_id");
 
+
 				ItemDataBeans idb = new ItemDataBeans(itemId, name, detail, price, stock, fileName, userId);
 				itemList.add(idb);
 			}
@@ -66,7 +68,10 @@ public class ItemDAO {
 
 		try {
 			conn = DBmanager.getConnection();
-			String sql ="SELECT * FROM item WHERE item_id = ?";
+			String sql ="SELECT * FROM item"
+								+ " JOIN user"
+								+ " ON item.add_user_id = user.user_id"
+								+ " WHERE item.item_id = ?;";
 
 			PreparedStatement ps;
 			ps = conn.prepareStatement(sql);
@@ -84,8 +89,12 @@ public class ItemDAO {
 			int stock = rs.getInt("stock");
 			String fileName = rs.getString("file_name");
 			int userId = rs.getInt("add_user_id");
+			Date addDate = rs.getDate("add_time");
+			String addUserName = rs.getString("user_name");
 
-			idb = new ItemDataBeans(item_id, name, detail, price, stock, fileName, userId);
+
+
+			idb = new ItemDataBeans(item_id, name, detail, price, stock, fileName, userId, addDate, addUserName);
 
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
@@ -101,5 +110,120 @@ public class ItemDAO {
             }
 		}
 		return idb;
+	}
+
+//	public ItemDataBeans selectByItemId(int itemId) {
+//
+//		Connection conn = null;
+//		ItemDataBeans idb = new ItemDataBeans();
+//
+//		try {
+//			conn = DBmanager.getConnection();
+//			String sql ="SELECT * FROM item WHERE item_id = ?";
+//
+//			PreparedStatement ps;
+//			ps = conn.prepareStatement(sql);
+//			ps.setInt(1, itemId);
+//			ResultSet rs = ps.executeQuery();
+//
+//			if(!rs.next()) {
+//				return null;
+//			}
+//
+//			int item_id = rs.getInt("item_id");
+//			String name = rs.getString("name");
+//			String detail = rs.getString("detail");
+//			int price = rs.getInt("price");
+//			int stock = rs.getInt("stock");
+//			String fileName = rs.getString("file_name");
+//			int userId = rs.getInt("add_user_id");
+//
+//			idb = new ItemDataBeans(item_id, name, detail, price, stock, fileName, userId);
+//
+//		} catch (SQLException e) {
+//			// TODO 自動生成された catch ブロック
+//			e.printStackTrace();
+//		}finally {
+//			//closeメソッドでデータベースを切断する
+//            if (conn != null) {
+//                try {
+//                    conn.close();
+//                } catch (SQLException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//		}
+//		return idb;
+//	}
+
+	public static void insertItem(String itemName,String itemDetail,int itemPrice,String fileName,int userId) {
+		Connection conn= null;
+
+		try {
+			conn = DBmanager.getConnection();
+
+			String sql = "INSERT INTO item(name,detail,price,file_name,add_user_id,add_time)"
+			+ " VALUE(?,?,?,?,?,now());";
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, itemName);
+			ps.setString(2, itemDetail);
+			ps.setInt(3, itemPrice);
+			ps.setString(4, fileName);
+			ps.setInt(5,userId);
+			ps.executeUpdate();
+
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}finally {
+			//closeメソッドでデータベースを切断する
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+		}
+	}
+
+	public static ArrayList<ItemDataBeans> getitemDataBeansListByUserId(int userId) {
+		// TODO 自動生成されたメソッド・スタブ
+		Connection conn = null;
+		ArrayList<ItemDataBeans> itemDataBeansList = null;
+
+		try {
+			conn = DBmanager.getConnection();
+
+			String sql = "SELECT * FROM item WHERE add_user_id = ?";
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, userId);
+			ResultSet rs = ps.executeQuery();
+
+			itemDataBeansList = new ArrayList<ItemDataBeans>();
+
+			while (rs.next()) {
+				ItemDataBeans idb = new ItemDataBeans();
+				idb.setItemId(rs.getInt("item_id"));
+				idb.setAddDate(rs.getDate("add_time"));
+
+				itemDataBeansList.add(idb);
+			}
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}finally {
+			//closeメソッドでデータベースを切断する
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+		}
+		return itemDataBeansList;
 	}
 }

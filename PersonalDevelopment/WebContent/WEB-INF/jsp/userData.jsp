@@ -111,39 +111,79 @@
 	<div class="container mt-5">
 		<div class="row">
 		    <div class="col">
-		    	<p class="text-center">出品リスト</p>
-		    		<div class="row">
-						<div class="card w-50 col">
-						  <img class="card-img-top" src="..." alt="カードの画像">
-						  <div class="card-body">
-						    <p class="card-text">カードのタイトルに基づいて、カードのコンテンツの大部分を占める簡単なサンプルテキスト。</p>
-						  </div>
-						</div>
-						<div class="card w-50 col">
-						  <img class="card-img-top" src="..." alt="カードの画像">
-						  <div class="card-body">
-						    <p class="card-text">カードのタイトルに基づいて、カードのコンテンツの大部分を占める簡単なサンプルテキスト。</p>
-						  </div>
-						</div>
-					</div>
+		    	<p class="text-center">出品情報</p>
+		    	<div class="card">
+		      		<div class="card-header text-center bg-primary text-white">出品情報</div>
+		      			<table class="table text-center">
+  							<thead>
+								<tr>
+							      <th></th>
+							      <th scope="col">出品日時</th>
+							      <th scope="col">出品状態</th>
+							    </tr>
+							</thead>
+							<tbody>
+								<c:forEach var="itemDataBeans" items="${itemDataBeansList}">
+								    <tr>
+								      <th scope="row">
+								      <a href="http://localhost:8080/PersonalDevelopment/Item?item_id=${itemDataBeans.itemId}" class="btn btn-primary rounded-circle p-0">▽</a>
+								      </th>
+								      <td>${itemDataBeans.addDate}</td>
+								      <td>出品中</td>
+								    </tr>
+								</c:forEach>
+							  </tbody>
+							</table>
+				</div>
 		    </div>
 		    <div class="col">
-		      <p class="text-center">購入リスト</p>
-		      	<div class="row">
-						<div class="card w-50 col">
-						  <img class="card-img-top" src="..." alt="カードの画像">
-						  <div class="card-body">
-						    <p class="card-text">カードのタイトルに基づいて、カードのコンテンツの大部分を占める簡単なサンプルテキスト。</p>
-						  </div>
-						</div>
-						<div class="card w-50 col">
-						  <img class="card-img-top" src="..." alt="カードの画像">
-						  <div class="card-body">
-						    <p class="card-text">カードのタイトルに基づいて、カードのコンテンツの大部分を占める簡単なサンプルテキスト。</p>
-						  </div>
-						</div>
+		      <p class="text-center">購入情報</p>
+		      	<div class="card">
+		      		<div class="card-header text-center bg-primary text-white">購入情報</div>
+		      			<table class="table text-center">
+  							<thead>
+								<tr>
+							      <th></th>
+							      <th scope="col">購入日時</th>
+							      <th scope="col">配送方法</th>
+							      <th scope="col">購入金額</th>
+							    </tr>
+							</thead>
+							<tbody>
+								<c:forEach var="buyDataBeans" items="${buyDataBeansList}">
+								    <tr>
+								      <th scope="row">
+								      <a href="http://localhost:8080/PersonalDevelopment/UserBuyHistoryDetail?buyId=${buyDataBeans.buyId}" class="btn btn-primary rounded-circle p-0">▽</a>
+								      </th>
+								      <td>${buyDataBeans.createDate}</td>
+								      <td>${buyDataBeans.deliveryMethodName}</td>
+								      <td>${buyDataBeans.totalPrice}円</td>
+								    </tr>
+								</c:forEach>
+							  </tbody>
+							</table>
+				</div>
+
+
+
+
+
+
+		      	<!-- <div class="row">
+					<div class="card w-50 col">
+					  <img class="card-img-top" src="..." alt="カードの画像">
+					  <div class="card-body">
+					    <p class="card-text">カードのタイトルに基づいて、カードのコンテンツの大部分を占める簡単なサンプルテキスト。</p>
+					  </div>
 					</div>
-		    </div>
+					<div class="card w-50 col">
+					  <img class="card-img-top" src="..." alt="カードの画像">
+					  <div class="card-body">
+					    <p class="card-text">カードのタイトルに基づいて、カードのコンテンツの大部分を占める簡単なサンプルテキスト。</p>
+					  </div>
+					</div>
+				</div> -->
+		   </div>
   	</div>
 
 	</div>

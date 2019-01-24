@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,24 +9,40 @@
 <title>商品の追加</title>
 </head>
 <body>
-
-
 	<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
 		<div class="container">
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<div class="mr-auto">
-					<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+					<a class="nav-link" href="http://localhost:8080/PersonalDevelopment/index">Home </a>
 				</div>
 				<ul class="navbar-nav">
+					<c:choose>
+						<c:when test="${udb == null}">
+							<li class="nav-item">
+				        		<a class="nav-link" href="http://localhost:8080/PersonalDevelopment/Regist">新規登録</a>
+				      		</li>
+				      	</c:when>
+				      	<c:when test="${udb != null}">
+				      		<li class="nav-item">
+				        		<a class="nav-link" href="http://localhost:8080/PersonalDevelopment/UserData?userId=${udb.userId}">${udb.name}さん</a>
+				      		</li>
+				      	</c:when>
+					</c:choose>
 		      		<li class="nav-item">
-		        		<a class="nav-link" href="#">新規登録</a>
+		        		<a class="nav-link" href="http://localhost:8080/PersonalDevelopment/Cart">カート</a>
 		      		</li>
-		      		<li class="nav-item">
-		        		<a class="nav-link" href="#">カート</a>
-		      		</li>
-		      		<li class="nav-item">
-		        		<a class="nav-link" href="#">ログイン</a>
-		      		</li>
+		      		<c:choose>
+		      			<c:when test="${udb == null}">
+		      				<li class="nav-item">
+				        		<a class="nav-link" href="http://localhost:8080/PersonalDevelopment/Login">ログイン</a>
+				      		</li>
+		      			</c:when>
+		      			<c:when test="${udb != null}">
+				      		<li class="nav-item">
+				      			<a class="nav-link" href="http://localhost:8080/PersonalDevelopment/Logout">ログアウト</a>
+				      		</li>
+				      	</c:when>
+				    </c:choose>
 		    	</ul>
 		    </div>
 		</div>
@@ -40,30 +57,31 @@
 			<div class="col-md-6 offset-md-3">
 				<div class="card grey">
 					<div class="card-body text-center">
-						<form action="" method="POST">
+						<form enctype="multipart/form-data" action="http://localhost:8080/PersonalDevelopment/ItemAdd" method="POST">
 								<div class="row">
 									<div class="input-field col s10 offset-s1 mb-3">
-										<input class="w-100" value="" name="user_name" type="text" placeholder="商品名" required>
+										<input class="w-100" value="" name="itemName" type="text" placeholder="商品名" required>
 									</div>
 								</div>
 								<div class="row">
 									<div class="input-field col s10 offset-s1 mb-3">
-										<textarea class="w-100" name="user_address" placeholder="商品詳細" required></textarea>
+										<textarea class="w-100" name="itemDetail" placeholder="商品詳細" required></textarea>
 									</div>
 								</div>
 								<div class="row">
 									<div class="input-field col s10 offset-s1 mb-3">
-										<input value="${item.price}" name="price" type="text" placeholder="価格" required>
+										<input value="" name="itemPrice" type="text" placeholder="価格" required>
 									</div>
 								</div>
 								<div class="row">
 									<div class="input-field col s10 offset-s1 mb-3">
 										<div class="custom-file">
-	   										<input type="file" id="inputGroupFile01" class="custom-file-input" aria-describedby="inputGroupFileAddon01">
-	   										<label class="custom-file-label" for="inputGroupFile01">ファイル選択...</label>
+	   										<input type="file" value="" name="fileName" class="custom-file-input" aria-describedby="inputGroupFileAddon01">
+	   										<label class="custom-file-label" for="inputGroupFile01">商品の画像ファイルを選択してください</label>
    										</div>
 									</div>
 								</div>
+											<input type="hidden" value="${udb.userId}" name="userId">
 								<div class="row">
 									<div class="col s5">
 										<div class="brank"></div>

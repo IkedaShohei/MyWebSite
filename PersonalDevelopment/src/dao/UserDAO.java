@@ -34,7 +34,7 @@ public class UserDAO {
 	        }
 
 			int userId = rs.getInt("user_id");
-			String name = rs.getString("name");
+			String name = rs.getString("user_name");
 
 			return  new UserDataBeans(userId,name);
 
@@ -77,7 +77,7 @@ public class UserDAO {
 			//これは1人分なのでif文でもいい
 			while(rs.next()){
 				int userId = rs.getInt("user_id");
-				String name = rs.getString("name");
+				String name = rs.getString("user_name");
 				String adress = rs.getString("adress");
 				String loginId = rs.getString("login_id");
 				String loginPassword = rs.getString("login_password");
@@ -128,7 +128,7 @@ public class UserDAO {
 			//これは1人分なのでif文でもいい
 			while(rs.next()){
 				int userId = rs.getInt("user_id");
-				String name = rs.getString("name");
+				String name = rs.getString("user_name");
 				String adress = rs.getString("adress");
 				String loginId = rs.getString("login_id");
 				String loginPassword = rs.getString("login_password");
@@ -164,7 +164,7 @@ public class UserDAO {
 		try {
 		conn = DBmanager.getConnection();
 
-		String sql = "UPDATE user SET name =?,adress = ?,login_password = ? WHERE login_id = ?";
+		String sql = "UPDATE user SET user_name =?,adress = ?,login_password = ? WHERE login_id = ?";
 
 //		String passwordCode = encryption(password);
 		PreparedStatement ps = conn.prepareStatement(sql);
@@ -200,7 +200,7 @@ public class UserDAO {
 		try {
 			conn = DBmanager.getConnection();
 
-			String sql = "INSERT INTO user (name, adress, login_id, login_password, create_date, update_date)VALUES ( ?, ?, ?, ?,now(), now())";
+			String sql = "INSERT INTO user (user_name, adress, login_id, login_password, create_date, update_date)VALUES ( ?, ?, ?, ?,now(), now())";
 
 
 			PreparedStatement ps = conn.prepareStatement(sql);

@@ -1,5 +1,7 @@
 package beans;
 
+import java.util.Date;
+
 /**商品の情報**/
 
 public class ItemDataBeans {
@@ -11,8 +13,17 @@ public class ItemDataBeans {
 	private int stock;
 	private String fileName;
 	private int userId;
+	private Date addDate;
 
-	public ItemDataBeans(int itemId,String name,String detail,int price,int stock,String fileName,int userId) {
+	//userテーブルと結合した際使う
+	private String addUserName;
+
+	public ItemDataBeans() {
+		// TODO 自動生成されたコンストラクター・スタブ
+	}
+
+	public ItemDataBeans(int itemId, String name, String detail, int price, int stock, String fileName, int userId) {
+		// TODO 自動生成されたコンストラクター・スタブ
 		this.setItemId(itemId);
 		this.setName(name);
 		this.setDetail(detail);
@@ -22,9 +33,19 @@ public class ItemDataBeans {
 		this.setUserId(userId);
 	}
 
-	public ItemDataBeans() {
-		// TODO 自動生成されたコンストラクター・スタブ
+	//全部入れるコンストラクタ
+	public ItemDataBeans(int itemId,String name,String detail,int price,int stock,String fileName,int userId,Date addDate,String addUserName) {
+		this.setItemId(itemId);
+		this.setName(name);
+		this.setDetail(detail);
+		this.setPrice(price);
+		this.setStock(stock);
+		this.setFileName(fileName);
+		this.setUserId(userId);
+		this.setAddDate(addDate);
+		this.setAddUserName(addUserName);
 	}
+
 
 	public int getItemId() {
 		return itemId;
@@ -67,6 +88,22 @@ public class ItemDataBeans {
 	}
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+
+	public Date getAddDate() {
+		return addDate;
+	}
+
+	public void setAddDate(Date addDate) {
+		this.addDate = addDate;
+	}
+
+	public String getAddUserName() {
+		return addUserName;
+	}
+
+	public void setAddUserName(String addUserName) {
+		this.addUserName = addUserName;
 	}
 
 }

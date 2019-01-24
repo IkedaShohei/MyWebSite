@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import beans.ItemDataBeans;
 
 public class Helper {
+	// 画像のアップロード先のパス
+	public static final String IMG_PATH = "/Users/ikedashohei/Documents/GitHub/MyWebSite/PersonalDevelopment/WebContent/image/";
 
 	//欲しい機能の簡略化メソッド倉庫
 

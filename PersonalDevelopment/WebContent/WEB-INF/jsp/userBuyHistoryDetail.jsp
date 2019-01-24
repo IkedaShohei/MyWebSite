@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-<title>商品詳細</title>
+<title>ユーザー情報</title>
 </head>
 <body>
 	<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
@@ -40,50 +40,52 @@
  	</nav>
 
  	<div class="container">
-		<div class="row center">
-			<h5 class="text-center col s12 light m-5">商品詳細</h5>
-		</div>
-		<form action="http://localhost:8080/PersonalDevelopment/ItemAddInCart" method="post">
-			<div class="row center mb-4">
-				<div class="col-10"></div>
-				<input type="hidden" name="itemId" value="${idb.itemId}">
-				<button type="submit" class="btn btn-outline-danger col-2">かごに追加</button>
+		<div class="card">
+			<div class="row center">
+				<h5 class="text-center col s12 light m-5">購入履歴詳細</h5>
 			</div>
-		</form>
 
-		<div class="container">
-			<div class="row">
-				<div class="col text-center">
-					<img src="image/${idb.fileName}" class="rounded mx-auto d-block" alt="">
-				</div>
-				<div class="col">
-					<div class="row">
-						<h3 class="col">商品名</h3>
-						<h3 class="col">${idb.name}</h3>
-					</div>
-					<div class="row">
-						<h5 class="col mt-4">値段</h5>
-						<h5 class="col mt-4">${idb.price}円</h5>
-						<h5 class="col mt-4">出品者名</h5>
-						<h5 class="col mt-4">${idb.addUserName}</h5>
-					</div>
-						<h4 class="col mt-4">商品詳細</h4>
-						<h6>${idb.detail}</h6>
-					<div class="row">
-						<h6 class="col mx-auto mt-5 ">商品追加日</h6>
-						<h6 class="col mx-auto mt-5 ">${idb.addDate}</h6>
-					</div>
-				</div>
-			</div>
-		</div>
+			<table class="table mb-5">
+				<thead>
+					<tr>
+						<th></th>
+						<th scope="col">購入日時</th>
+						<th scope="col">配送方法</th>
+						<th scope="col">合計金額</th>
+						</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th scope="row"></th>
+						<td>${bdb.createDate}</td>
+						<td>${bdb.deliveryMethodName}</td>
+						<td>${bdb.totalPrice}</td>
+				    </tr>
+				</tbody>
+		  	</table>
+
+			<table class="table mb-0 text-center">
+				<thead>
+					<tr>
+						<th scope="col">商品名</th>
+						<th scope="col">単価</th>
+						</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="buyDetailItem" items="${buyDetailItemList}" >
+						<tr>
+							<td class="center">${buyDetailItem.name}</td>
+							<td class="center">${buyDetailItem.price}円</td>
+						</tr>
+					</c:forEach>
+						<tr>
+							<td class="center">${bdb.deliveryMethodName}</td>
+							<td class="center">${bdb.deliveryMethodPrice}円</td>
+						</tr>
+				</tbody>
+		  	</table>
+		  </div>
 	</div>
-
-
-	<footer class="fixed-bottom bg-light">
-	    <div class="container text-center">
-	      	<p>Made by ikeda</p>
-	    </div>
-	</footer>
 
 </body>
 </html>
