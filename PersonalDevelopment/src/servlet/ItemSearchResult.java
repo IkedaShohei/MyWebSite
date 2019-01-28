@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -54,6 +55,14 @@ public class ItemSearchResult extends HttpServlet {
 		List<ItemDataBeans> itemList = itemDao.searchItemsBySearchWord(searchWord);
 
 		request.setAttribute("itemList", itemList);
+
+		try {
+			double itemCount = ItemDAO.getItemCount(searchWord);
+			request.setAttribute("itemCount", (int) itemCount);
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/itemSearchResult.jsp");
 		dispatcher.forward(request, response);

@@ -1,10 +1,16 @@
 package dao;
 
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import javax.xml.bind.DatatypeConverter;
 
 import base.DBmanager;
 import beans.UserDataBeans;
@@ -24,10 +30,10 @@ public class UserDAO {
 
 		String sql = "SELECT * FROM user WHERE login_id = ? and login_password = ?";
 
-//			String passwordCode = encryption(password);
+			String passwordCode = encryption(password);
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, loginId);
-			ps.setString(2, password);
+			ps.setString(2, passwordCode);
 			ResultSet rs = ps.executeQuery();
 
 			if (!rs.next()) {
@@ -167,11 +173,11 @@ public class UserDAO {
 
 		String sql = "UPDATE user SET user_name =?,adress = ?,login_password = ? WHERE login_id = ?";
 
-//		String passwordCode = encryption(password);
+		String passwordCode = encryption(password);
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1, userName);
 		ps.setString(2, adress);
-		ps.setString(3, password);
+		ps.setString(3, passwordCode);
 		ps.setString(4, loginId);
 		result = ps.executeUpdate();
 
@@ -203,12 +209,12 @@ public class UserDAO {
 
 			String sql = "INSERT INTO user (user_name, adress, login_id, login_password, create_date, update_date)VALUES ( ?, ?, ?, ?,now(), now())";
 
-
+			String passwordCode = encryption(password);
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, name);
 			ps.setString(2, adress);
 			ps.setString(3, loginId);
-			ps.setString(4, password);
+			ps.setString(4, passwordCode);
 
 			result = ps.executeUpdate();
 
@@ -310,26 +316,26 @@ public class UserDAO {
 //	・それを登録、更新、ログインの際に呼び出してからそれぞれのメソッドを呼び出す。
 //	 @throws NoSuchAlgorithmException
 
-//	public String encryption(String password){
-//		//ハッシュを生成したい元の文字列
-//		String source = password;
-//		//ハッシュ生成前にバイト配列に置き換える際のCharset
-//		Charset charset = StandardCharsets.UTF_8;
-//		//ハッシュアルゴリズム
-//		String algorithm = "MD5";
-//
-//		//ハッシュ生成処理
-//		byte[] bytes = null;
-//		try {
-//			bytes = MessageDigest.getInstance(algorithm).digest(source.getBytes(charset));
-//		} catch (NoSuchAlgorithmException e) {
-//			// TODO 自動生成された catch ブロック
-//			e.printStackTrace();
-//		}
-//		String result = DatatypeConverter.printHexBinary(bytes);
-//		System.out.println(result);
-//
-//		return result;
-//
-//	}
+	public String encryption(String password){
+		//ハッシュを生成したい元の文字列
+		String source = password;
+		//ハッシュ生成前にバイト配列に置き換える際のCharset
+		Charset charset = StandardCharsets.UTF_8;
+		//ハッシュアルゴリズム
+		String algorithm = "MD5";
+
+		//ハッシュ生成処理
+		byte[] bytes = null;
+		try {
+			bytes = MessageDigest.getInstance(algorithm).digest(source.getBytes(charset));
+		} catch (NoSuchAlgorithmException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+		String result = DatatypeConverter.printHexBinary(bytes);
+		System.out.println(result);
+
+		return result;
+
+	}
 }

@@ -330,7 +330,28 @@ public class ItemDAO {
                 }
             }
 		}
-
-
 	}
+
+	public static double getItemCount(String searchWord) throws SQLException {
+		Connection conn = null;
+		double coung = 0.0;
+		PreparedStatement st = null;
+		try {
+			conn = DBmanager.getConnection();
+			st = conn.prepareStatement("select count(*) as cnt from item where name like ?");
+			st.setString(1, "%" + searchWord + "%");
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+				coung = Double.parseDouble(rs.getString("cnt"));
+			}
+			return coung;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
+		return coung;
+}
 }

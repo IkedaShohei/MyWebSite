@@ -57,19 +57,20 @@
 		<div class="container">
 			<p class="text-center m-xl-5">ここに検索結果を表示</p>
 			<c:if test="${itemList != null}">
-				<div class="card-deck">
-					<c:forEach var="idb" items="${itemList}">
-						<div class="card">
-							<a href="http://localhost:8080/PersonalDevelopment/Item?item_id=${idb.itemId}">
-						    <img class="card-img-top" alt="noimage" src="image/${idb.fileName}">
-						    </a>
-							    <div class="card-body">
-							    	<h5 class="card-title">${idb.name}</h5>
-									<p>${idb.price}円</p>
-							      	<p class="card-text">${idb.detail}</p>
-							    </div>
-						</div>
-					</c:forEach>
+				<div class="row">
+					<!-- <div class="col-2"> -->
+						<c:forEach var="idb" items="${itemList}">
+							<div class="card col-2 m-1">
+								<a href="http://localhost:8080/PersonalDevelopment/Item?item_id=${idb.itemId}">
+							    <img class="card-img-top" alt="noimage" src="image/${idb.fileName}">
+							    </a>
+								    <div class="card-body">
+								    	<h5 class="card-title">${idb.name}</h5>
+										<p>${idb.price}円</p>
+								    </div>
+							</div>
+						</c:forEach>
+					<!-- </div> -->
 				</div>
 			</c:if>
 		</div>
