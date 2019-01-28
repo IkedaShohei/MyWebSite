@@ -46,8 +46,9 @@
 		</div>
 
 		<div class="container text-center mb-5">
-			<p>ログインID：（ike）を</p>
+			<p>ログインID：${udb.loginId}を</p>
 			<p>本当に削除してよろしいですか。</p>
+			<input type="hidden" name="userId" value="${udb.userId}">
 		</div>
 
 
@@ -57,7 +58,7 @@
 			</div>
 			<div class="col s3">
 				<p class="center-align">
-					<button class="btn btn-primary rounded-pill btn-sm  col s8 offset-s2" type="submit" name="action">ユーザー詳細</button>
+				<a class="btn btn-primary rounded-pill btn-sm  col s8 offset-s2"  href="http://localhost:8080/PersonalDevelopment/ManagementUser" role="button">キャンセル</a>
 				</p>
 			</div>
 			<div class="col s2">
@@ -65,7 +66,7 @@
 			</div>
 			<div class="col s3">
 				<p class="center-align">
-				<button class="btn btn-primary rounded-pill btn-sm  col s8 offset-s2" type="submit" name="action">商品詳細</button>
+				<a class="btn btn-danger rounded-pill btn-sm  col s8 offset-s2" href="http://localhost:8080/PersonalDevelopment/UserDeleteResult?userId=${udb.userId}" role="button">削除</a>
 				</p>
 			</div>
 			<div class="col s2">

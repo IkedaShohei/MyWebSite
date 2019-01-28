@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-<title>削除完了</title>
+<title>ホーム</title>
 </head>
 <body>
 	<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
@@ -31,36 +31,62 @@
 		      		<li class="nav-item">
 		        		<a class="nav-link" href="http://localhost:8080/PersonalDevelopment/Cart">カート</a>
 		      		</li>
-		      		<li class="nav-item">
-		        		<a class="nav-link" href="http://localhost:8080/PersonalDevelopment/Login">ログイン</a>
-		      		</li>
+		      		<c:choose>
+		      			<c:when test="${udb == null}">
+		      				<li class="nav-item">
+				        		<a class="nav-link" href="http://localhost:8080/PersonalDevelopment/Login">ログイン</a>
+				      		</li>
+		      			</c:when>
+		      			<c:when test="${udb != null}">
+				      		<li class="nav-item">
+				      			<a class="nav-link" href="http://localhost:8080/PersonalDevelopment/Logout">ログアウト</a>
+				      		</li>
+				      	</c:when>
+				    </c:choose>
 		    	</ul>
 		    </div>
 		</div>
  	</nav>
 
 
-	<div class="container">
-		<div class="row center">
-			<h5 class="text-center col s12 light m-5">ユーザー削除完了</h5>
-		</div>
+ 	<div class="container">
+ 		<div class="row">
+ 			<div class="col-2"></div>
+ 			<div class="col-8">
+			 		<div class="card card-body bg-light my-3 mx-auto w-75 text-center ">
+			 			<div class="row">
+			 				<div class="col">
+			 					<p>ユーザーID</p>
+			 					<p>名前</p>
+			 					<p>住所</p>
+			 					<p>ログインID</p>
+			 					<p>アカウント作成日</p>
+			 					<p>アカウント更新日</p>
+			 				</div>
+			 				<div class="col">
+			 					<p>${udb.userId}</p>
+			 					<p>${udb.name}</p>
+			 					<p>${udb.adress}</p>
+			 					<p>${udb.loginId}</p>
+			 					<p>${udb.createDate}</p>
+			 					<p>${udb.updateDate}</p>
+			 				</div>
+			 			</div>
 
-		<div class="row">
-			<div class="col s3">
-				<div class="brank"></div>
-			</div>
-			<div class="col s6">
-				<p class="center-align">
-				<a class="btn btn-primary rounded-pill btn-sm  col s8 offset-s2"  href="http://localhost:8080/PersonalDevelopment/ManagementUser" role="button">ユーザー情報一覧へ</a>
-				</p>
-			</div>
-			<div class="col s3">
-				<div class="brank"></div>
-			</div>
+			 			<div class="row mt-3">
+			 				<span class="col"></span>
+			 				<a class="col btn btn-primary rounded-pill" href="http://localhost:8080/PersonalDevelopment/ManagementUser" role="button">戻る</a>
+			 				<span class="col"></span>
+			 			</div>
+			 		</div>
+		 	</div>
+		 	<div class="col-2"></div>
 		</div>
-	</div>
+ 	</div>
 
-	<footer class="fixed-bottom bg-light">
+
+
+ 	<footer class="fixed-bottom bg-light">
 	    <div class="container text-center">
 	      	<p>Made by ikeda</p>
 	    </div>

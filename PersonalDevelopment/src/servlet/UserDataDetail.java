@@ -9,17 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.UserDataBeans;
+import dao.UserDAO;
+
 /**
- * Servlet implementation class ManagerPage
+ * Servlet implementation class UserDataDetail
  */
-@WebServlet("/ManagerPage")
-public class ManagerPage extends HttpServlet {
+@WebServlet("/UserDataDetail")
+public class UserDataDetail extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ManagerPage() {
+    public UserDataDetail() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,10 +33,18 @@ public class ManagerPage extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
+		String userIdStr = request.getParameter("userId");
+		int userId = Integer.parseInt(userIdStr);
 
-		//managerPage.jsp（管理者ページ）にフォワード
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/managerPage.jsp");
-		dispatcher.forward(request, response);
+		UserDAO userDao = new UserDAO();
+		UserDataBeans udb = userDao.getDetailById(userId);
+
+		request.setAttribute("udb", udb);
+
+		//userDataDetail.jsp(ユーザー情報詳細画面)にフォワード
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userDataDetail.jsp");
+        dispatcher.forward(request, response);
+
 	}
 
 	/**

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import base.DBmanager;
 import beans.UserDataBeans;
@@ -227,6 +228,81 @@ public class UserDAO {
 			}
 		}
 		return result;
+	}
+
+	public static ArrayList<UserDataBeans> selectAllUserData() {
+		// TODO 自動生成されたメソッド・スタブ
+		Connection conn = null;
+		ArrayList<UserDataBeans> userDataBeansList = null;
+
+		try {
+			conn = DBmanager.getConnection();
+
+			String sql ="SELECT * FROM user;";
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+
+			userDataBeansList = new ArrayList<>();
+
+			while (rs.next()) {
+				int userId = rs.getInt("user_id");
+				String name = rs.getString("user_name");
+				String adress = rs.getString("adress");
+				String loginId = rs.getString("login_id");
+				String password = rs.getString("login_password");
+				String createDate = rs.getString("create_date");
+				String updateDate = rs.getString("update_date");
+
+				UserDataBeans udb = new UserDataBeans(userId, name, adress, loginId, password, createDate, updateDate);
+				userDataBeansList.add(udb);
+			}
+
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}finally{
+			//データベースを切断する
+			if(conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO: handle exception
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return userDataBeansList;
+	}
+
+	public static void deleteUserByUserId(int userId) {
+		// TODO 自動生成されたメソッド・スタブ
+		Connection conn = null;
+
+		try {
+			conn = DBmanager.getConnection();
+
+			String sql = "DELETE FROM user WHERE user_id = ?";
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, userId);
+			ps.executeUpdate();
+
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}finally{
+			//データベースを切断する
+			if(conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO: handle exception
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 //	暗号化するメソッド

@@ -31,9 +31,18 @@
 		      		<li class="nav-item">
 		        		<a class="nav-link" href="http://localhost:8080/PersonalDevelopment/Cart">カート</a>
 		      		</li>
-		      		<li class="nav-item">
-		        		<a class="nav-link" href="http://localhost:8080/PersonalDevelopment/Login">ログイン</a>
-		      		</li>
+		      		<c:choose>
+		      			<c:when test="${udb == null}">
+		      				<li class="nav-item">
+				        		<a class="nav-link" href="http://localhost:8080/PersonalDevelopment/Login">ログイン</a>
+				      		</li>
+		      			</c:when>
+		      			<c:when test="${udb != null}">
+				      		<li class="nav-item">
+				      			<a class="nav-link" href="http://localhost:8080/PersonalDevelopment/Logout">ログアウト</a>
+				      		</li>
+				      	</c:when>
+				    </c:choose>
 		    	</ul>
 		    </div>
 		</div>

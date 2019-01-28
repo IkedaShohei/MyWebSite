@@ -9,17 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.ItemDataBeans;
+import dao.ItemDAO;
+
 /**
- * Servlet implementation class ManagerPage
+ * Servlet implementation class ManagerItemDelete
  */
-@WebServlet("/ManagerPage")
-public class ManagerPage extends HttpServlet {
+@WebServlet("/ManagerItemDelete")
+public class ManagerItemDelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ManagerPage() {
+    public ManagerItemDelete() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,11 +32,18 @@ public class ManagerPage extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String itemIdStr = request.getParameter("itemId");
+		int itemId = Integer.parseInt(itemIdStr);
 
+		ItemDAO itemDao = new ItemDAO();
+		ItemDataBeans idb = itemDao.selectByItemId(itemId);
 
-		//managerPage.jsp（管理者ページ）にフォワード
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/managerPage.jsp");
+		request.setAttribute("idb", idb);
+
+		//managerItemDelete.jsp（商品情報削除確認ページ）にフォワード
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/managerItemDelete.jsp");
 		dispatcher.forward(request, response);
+
 	}
 
 	/**
@@ -41,7 +51,16 @@ public class ManagerPage extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		request.setCharacterEncoding("UTF-8");
+
+		String itemIdStr = request.getParameter("itemId");
+		int itemId = Integer.parseInt(itemIdStr);
+
+		ItemDAO.deleteItemByItemId(itemId);
+
+		//商品管理画面にリダイレクト
+		response.sendRedirect("http://localhost:8080/PersonalDevelopment/ManagementItem");
+
 	}
 
 }

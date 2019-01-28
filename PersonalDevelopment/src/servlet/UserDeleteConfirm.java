@@ -9,17 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.UserDataBeans;
+import dao.UserDAO;
+
 /**
- * Servlet implementation class ManagerPage
+ * Servlet implementation class UserDeleteConfirm
  */
-@WebServlet("/ManagerPage")
-public class ManagerPage extends HttpServlet {
+@WebServlet("/UserDeleteConfirm")
+public class UserDeleteConfirm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ManagerPage() {
+    public UserDeleteConfirm() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,9 +33,16 @@ public class ManagerPage extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
+		String userIdStr = request.getParameter("userId");
+		int userId = Integer.parseInt(userIdStr);
 
-		//managerPage.jsp（管理者ページ）にフォワード
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/managerPage.jsp");
+		UserDAO userDao = new UserDAO();
+		UserDataBeans udb = userDao.getDetailById(userId);
+
+		request.setAttribute("udb", udb);
+
+		//userDeleteConfirm.jsp（管理者用ユーザー削除確認画面）にフォワード
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userDeleteConfirm.jsp");
 		dispatcher.forward(request, response);
 	}
 

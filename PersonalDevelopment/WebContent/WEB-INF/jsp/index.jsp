@@ -65,6 +65,15 @@
 					<p class="col-sm-2"></p>
 				</div>
 			</div>
+			<div class="col-lg-8 mx-auto mb-5">
+				<c:if test="${udb.userId == 1}">
+					<div class="row">
+						<span class="col-sm-4"></span>
+						<a class="col-sm-4 btn btn-outline-danger" href="http://localhost:8080/PersonalDevelopment/ManagerPage" role="button">管理者ページへ</a>
+						<span class="col-sm-4"></span>
+					</div>
+				</c:if>
+			</div>
 		</div>
 	</header>
 

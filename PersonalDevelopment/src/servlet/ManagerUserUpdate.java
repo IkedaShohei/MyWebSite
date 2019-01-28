@@ -9,22 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.UserDataBeans;
 import dao.UserDAO;
 
 /**
- * Servlet implementation class UserDeleteResult
+ * Servlet implementation class ManagerUserUpdate
  */
-@WebServlet("/UserDeleteResult")
-public class UserDeleteResult extends HttpServlet {
+@WebServlet("/ManagerUserUpdate")
+public class ManagerUserUpdate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserDeleteResult() {
+    public ManagerUserUpdate() {
         super();
         // TODO Auto-generated constructor stub
-
     }
 
 	/**
@@ -32,16 +32,18 @@ public class UserDeleteResult extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+
 		String userIdStr = request.getParameter("userId");
 		int userId = Integer.parseInt(userIdStr);
 
-		UserDAO.deleteUserByUserId(userId);
+		UserDAO userDao = new UserDAO();
+		UserDataBeans udb =userDao.getDetailById(userId);
 
-		//userDeleteResult.jsp（ユーザー削除結果）にフォワード
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userDeleteResult.jsp");
-        dispatcher.forward(request, response);
+		request.setAttribute("udb", udb);
 
-
+		//managerUserUpdate.jspにフォワード
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/managerUserUpdate.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	/**
@@ -51,29 +53,28 @@ public class UserDeleteResult extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
 
-		String userId1 = request.getParameter("userId");
-		int userId = Integer.parseInt(userId1);
-		String userName = request.getParameter("user_name");
+		String loginId = request.getParameter("loginId");
+		String name = request.getParameter("name");
 		String adress = request.getParameter("adress");
 		String password = request.getParameter("password");
-		//パスが確認用と一致するか確認する際に使用
-		String passwordConfirmation = request.getParameter("passwordConfirmation");
-
-		//パスワードとパスワード（確認）が一致しなかった時
-		if(!(password.equals(passwordConfirmation))) {
-			request.setAttribute("errMsg", "入力された内容は正しくありません。");
-
-		//UserDataにフォワード
-			doGet(request, response);
-			return;
-		}
+		String passwordConfirm = request.getParameter("passwordConfirm");
 
 		UserDAO userDao = new UserDAO();
-		//userDao.userUpDate(userId, userName, adress, password);
+		userDao.userUpDate(loginId, name, adress, password);
 
-//		userDataUpdateResult.jsp（ユーザー情報更新結果）にフォワード
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userDataUpdateResult.jsp");
-        dispatcher.forward(request, response);
+		//パスワードとパスワード（確認）が一致しなかった時
+			if(!(password.equals(passwordConfirm))) {
+				request.setAttribute("errMsgPass", "入力されたパスワードが一致していません。");
+
+				doGet(request, response);
+				return;
+			}
+
+
+		response.sendRedirect("http://localhost:8080/PersonalDevelopment/ManagementUser");
+
+
+
 	}
 
 }

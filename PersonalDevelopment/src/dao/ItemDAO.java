@@ -226,4 +226,111 @@ public class ItemDAO {
 		}
 		return itemDataBeansList;
 	}
+
+	public static ArrayList<ItemDataBeans> selectAllItem() {
+		// TODO 自動生成されたメソッド・スタブ
+		Connection conn = null;
+		ArrayList<ItemDataBeans> allItemBeansList = new ArrayList<ItemDataBeans>();
+
+		try {
+			conn = DBmanager.getConnection();
+
+			String sql ="SELECT * FROM item"
+								+ " JOIN user"
+								+ " ON item.add_user_id = user.user_id";
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				int item_id = rs.getInt("item_id");
+				String name = rs.getString("name");
+				String detail = rs.getString("detail");
+				int price = rs.getInt("price");
+				int stock = rs.getInt("stock");
+				String fileName = rs.getString("file_name");
+				int userId = rs.getInt("add_user_id");
+				Date addDate = rs.getDate("add_time");
+				String addUserName = rs.getString("user_name");
+
+				ItemDataBeans idb = new ItemDataBeans(item_id, name, detail, price, stock, fileName, userId, addDate, addUserName);
+				allItemBeansList.add(idb);
+			}
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}finally {
+			//closeメソッドでデータベースを切断する
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+		}
+		return allItemBeansList;
+	}
+
+	public static void updateItem(String itemName, String itemDetail, int itemPrice, int userId, String name, int itemId) {
+		// TODO 自動生成されたメソッド・スタブ
+		Connection conn = null;
+
+		try {
+			conn= DBmanager.getConnection();
+
+			String sql ="UPDATE item SET name = ?,detail = ?,price = ?,userId = ?,file_name = ? WHERE item_id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, itemName);
+			ps.setString(2, itemDetail);
+			ps.setInt(3, itemPrice);
+			ps.setInt(4, userId);
+			ps.setString(5, name);
+			ps.setInt(6, itemId);
+			ps.executeUpdate();
+
+
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}finally {
+			//closeメソッドでデータベースを切断する
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+		}
+	}
+
+	public static void deleteItemByItemId(int itemId) {
+		// TODO 自動生成されたメソッド・スタブ
+		Connection conn = null;
+
+		try {
+			String sql = "DELETE FROM item WHERE item_id = ?";
+
+			conn = DBmanager.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, itemId);
+			ps.executeUpdate();
+
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}finally {
+			//closeメソッドでデータベースを切断する
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+		}
+
+
+	}
 }
