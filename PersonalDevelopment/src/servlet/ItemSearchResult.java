@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import beans.ItemDataBeans;
 import dao.ItemDAO;
@@ -36,6 +37,16 @@ public class ItemSearchResult extends HttpServlet {
 		// TODO Auto-generated method stub
 		//文字化け防止
 		response.setContentType("text/html; charset=UTF-8");
+
+		//インスタンスを取得してセッションがあるか比べる準備
+		HttpSession session = request.getSession();
+
+		//もしセッションがなかったらログイン画面にリダイレクト
+		if(session.getAttribute("udb") == null) {
+			response.sendRedirect("http://localhost:8080/PersonalDevelopment/Login");
+			return;
+		}
+
 		//itemSearchResult.jspにフォワード
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/itemSearchResult.jsp");
         dispatcher.forward(request, response);

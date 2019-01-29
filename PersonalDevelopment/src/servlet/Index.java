@@ -31,6 +31,7 @@ public class Index extends HttpServlet {
 		// TODO Auto-generated method stub
 		//文字化け防止
 		response.setContentType("text/html; charset=UTF-8");
+
 		//index.jspにフォワード
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/index.jsp");
         dispatcher.forward(request, response);

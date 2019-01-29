@@ -38,7 +38,15 @@ public class Buy extends HttpServlet {
 		//文字化け防止
 		response.setContentType("text/html; charset=UTF-8");
 
+		//インスタンスを取得してセッションがあるか比べる準備
 		HttpSession session = request.getSession();
+
+		//もしセッションがなかったらログイン画面にリダイレクト
+		if(session.getAttribute("udb") == null) {
+			/**LoginServletMyselfのサーブレットにリダイレクト**/
+			response.sendRedirect("http://localhost:8080/PersonalDevelopment/Login");
+			return;
+		}
 
 		ArrayList<ItemDataBeans> cart = (ArrayList<ItemDataBeans>) session.getAttribute("cart");
 

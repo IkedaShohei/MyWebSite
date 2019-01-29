@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import beans.ItemDataBeans;
@@ -33,6 +34,16 @@ public class ManagerItemUpdate extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+
+		//インスタンスを取得してセッションがあるか比べる準備
+		HttpSession session = request.getSession();
+
+		//もしセッションがなかったらログイン画面にリダイレクト
+		if(session.getAttribute("udb") == null) {
+			response.sendRedirect("http://localhost:8080/PersonalDevelopment/Login");
+			return;
+		}
+
 		String itemIdStr = request.getParameter("itemId");
 		int itemId = Integer.parseInt(itemIdStr);
 

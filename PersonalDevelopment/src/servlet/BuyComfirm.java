@@ -39,6 +39,15 @@ public class BuyComfirm extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html; charset=UTF-8");
 
+		//インスタンスを取得してセッションがあるか比べる準備
+		HttpSession session = request.getSession();
+
+		//もしセッションがなかったらログイン画面にリダイレクト
+		if(session.getAttribute("udb") == null) {
+			response.sendRedirect("http://localhost:8080/PersonalDevelopment/Login");
+			return;
+		}
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/buyConfirm.jsp");
 		dispatcher.forward(request, response);
 	}

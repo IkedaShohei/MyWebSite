@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class ManagerPage
@@ -29,6 +30,14 @@ public class ManagerPage extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		//インスタンスを取得してセッションがあるか比べる準備
+		HttpSession session = request.getSession();
+
+		//もしセッションがなかったらログイン画面にリダイレクト
+		if(session.getAttribute("udb") == null) {
+			response.sendRedirect("http://localhost:8080/PersonalDevelopment/Login");
+			return;
+		}
 
 
 		//managerPage.jsp（管理者ページ）にフォワード
