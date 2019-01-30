@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,8 +69,8 @@
 			 					<p>${udb.name}</p>
 			 					<p>${udb.adress}</p>
 			 					<p>${udb.loginId}</p>
-			 					<p>${udb.createDate}</p>
-			 					<p>${udb.updateDate}</p>
+			 					<p><fmt:formatDate value="${udb.createDate}" pattern="yyyy年MM月dd日" /></p>
+			 					<p><fmt:formatDate value="${udb.updateDate}" pattern="yyyy年MM月dd日" /></p>
 			 				</div>
 			 			</div>
 

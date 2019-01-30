@@ -49,13 +49,15 @@
  		</form>
 		<div class="center">
 			<h5 class="text-center">検索結果</h5>
-			<p class="text-center">
-				検索結果${itemCount}件
-			</p>
+			<c:if test="${itemCount != null}">
+				<p class="text-center">
+					検索結果${itemCount}件
+				</p>
+			</c:if>
 		</div>
 
 		<div class="container">
-			<p class="text-center m-xl-5">ここに検索結果を表示</p>
+			<!-- <p class="text-center m-xl-5">ここに検索結果を表示</p> -->
 			<c:if test="${itemList != null}">
 				<div class="row">
 					<!-- <div class="col-2"> -->

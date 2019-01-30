@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,7 +72,7 @@
 						<h6>${idb.detail}</h6>
 					<div class="row">
 						<h6 class="col mx-auto mt-5 ">商品追加日</h6>
-						<h6 class="col mx-auto mt-5 ">${idb.addDate}</h6>
+						<h6 class="col mx-auto mt-5 "><fmt:formatDate value="${idb.addDate}" pattern="yyyy年MM月dd日" /></h6>
 					</div>
 				</div>
 			</div>

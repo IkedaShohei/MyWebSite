@@ -68,16 +68,15 @@
 
 				<div class="row">
 					<c:forEach var="idb" items="${cart}" varStatus="status">
-						<div class="card w-25 col">
+						<div class="card w-25 col-2 m-1">
 							<a href="http://localhost:8080/PersonalDevelopment/Item?item_id=${idb.itemId}">
 						 	<img class="card-img-top" src="image/${idb.fileName}" alt="No image">
 						 	</a>
 						 	<div class="card-body">
 						 		<div class="row">
-							  		<span>${idb.name}</span>
-							  		<span>${idb.price}</span>
+							  		<p class="col-5">${idb.name}</p>
+							  		<p class="col-7">${idb.price}円</p>
 							  	</div>
-							    <p class="card-text">${idb.detail}</p>
 							    <span><input type="checkbox" name="delete_item_id_list" value="${idb.itemId}"> <label for="$">削除</label></span>
 							</div>
 						</div>

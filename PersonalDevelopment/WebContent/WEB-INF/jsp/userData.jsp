@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -128,7 +129,7 @@
 								      <th scope="row">
 								      <a href="http://localhost:8080/PersonalDevelopment/Item?item_id=${itemDataBeans.itemId}" class="btn btn-primary rounded-circle p-0">▽</a>
 								      </th>
-								      <td>${itemDataBeans.addDate}</td>
+								      <td><fmt:formatDate value="${itemDataBeans.addDate}" pattern="yyyy年MM月dd日" /></td>
 								      <td>出品中</td>
 								    </tr>
 								</c:forEach>
@@ -155,7 +156,7 @@
 								      <th scope="row">
 								      <a href="http://localhost:8080/PersonalDevelopment/UserBuyHistoryDetail?buyId=${buyDataBeans.buyId}" class="btn btn-primary rounded-circle p-0">▽</a>
 								      </th>
-								      <td>${buyDataBeans.createDate}</td>
+								      <td><fmt:formatDate value="${buyDataBeans.createDate}" pattern="yyyy年MM月dd日" /></td>
 								      <td>${buyDataBeans.deliveryMethodName}</td>
 								      <td>${buyDataBeans.totalPrice}円</td>
 								    </tr>

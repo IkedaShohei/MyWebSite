@@ -59,7 +59,7 @@
 						<th scope="row"></th>
 						<td>${bdb.createDate}</td>
 						<td>${bdb.deliveryMethodName}</td>
-						<td>${bdb.totalPrice}</td>
+						<td>${bdb.totalPrice}円</td>
 				    </tr>
 				</tbody>
 		  	</table>

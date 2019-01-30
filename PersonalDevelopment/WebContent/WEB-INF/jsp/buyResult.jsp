@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,7 +85,7 @@
 				<tbody>
 					<tr>
 						<th scope="row"></th>
-						<td>${resultBDB.createDate}</td>
+						<td><fmt:formatDate value="${resultBDB.createDate}" pattern="yyyy年MM月dd日" /></td>
 						<td>${resultBDB.deliveryMethodName}</td>
 						<td>${resultBDB.totalPrice}円</td>
 				    </tr>

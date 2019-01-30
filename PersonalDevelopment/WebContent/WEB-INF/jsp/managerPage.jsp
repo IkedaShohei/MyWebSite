@@ -60,7 +60,7 @@
 			<div class="col s2">
 				<div class="brank"></div>
 			</div>
-				<a class="col s3 btn btn-outline-primary" href="http://localhost:8080/PersonalDevelopment/ManagementItem" role="button">商品詳細</a>
+				<a class="col s3 btn btn-outline-primary" href="http://localhost:8080/PersonalDevelopment/ManagementItem" role="button">商品一覧</a>
 			<div class="col s2">
 				<div class="brank"></div>
 			</div>
