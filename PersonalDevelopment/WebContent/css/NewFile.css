@@ -1,0 +1,83 @@
+@charset "UTF-8";
+
+
+/** ⭐︎のcss **/
+.evaluation{
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+}
+.evaluation input[type='radio']{
+  display: none;
+}
+.evaluation label{
+  position: relative;
+  padding: 10px 10px 0;
+  color: gray;
+  cursor: pointer;
+  font-size: 50px;
+}
+.evaluation label .text{
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  text-align: center;
+  font-size: 12px;
+  color: gray;
+}
+.evaluation label:hover,
+.evaluation label:hover ~ label,
+.evaluation input[type='radio']:checked ~ label{
+  color: #ffcc00;
+}
+
+/* レビュータイトルのcss */
+.cp_form .cp_group {
+position: relative;
+/* width: 600px; */
+margin: 40px auto;
+/* box-shadow:0px 0px 3px 2px #ededed; */
+}
+
+.cp_form .cp_group textarea.medium {
+width: 100%;
+height: 10em;
+}
+.cp_form .cp_group textarea.small {
+width: 100%;
+height: 5.5em;
+}
+.cp_form .clearfix {
+*zoom: 1;
+}
+.cp_form .clearfix:before, .cp_form .clearfix:after {
+display: table;
+line-height: 0;
+content: '';
+}
+.cp_form .cp_group {
+font-size: 1em;
+line-height: 1.231;
+/* border: 2px solid #7f8c8d;
+border-radius: 6px; */
+}
+
+.cp_form .cp_group > div {
+position: relative;
+margin-right: 25px;
+/* margin-left: 25px; */
+}
+
+.cp_form .cp_group div, .cp_form .cp_group span,
+.cp_form .cp_group label, .cp_form .cp_group input,
+.cp_form .cp_group textarea, .cp_form .cp_group select,
+.cp_form .cp_group button, .cp_form .cp_group ul,
+.cp_form .cp_group li, .cp_form .cp_group a {
+font-family: inherit;
+color: inherit;
+}
+
+
+
+

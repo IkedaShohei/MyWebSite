@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.ItemDataBeans;
+import beans.reviewDataBeans;
 import dao.ItemDAO;
 
 /**
@@ -48,14 +50,20 @@ public class Item extends HttpServlet {
 		String itemId1 = request.getParameter("item_id");
 		int itemId = Integer.parseInt(itemId1);
 
+		//アイテム情報を取得してセット
 		ItemDAO itemDao = new ItemDAO();
 		ItemDataBeans idb = itemDao.selectByItemId(itemId);
 
 		request.setAttribute("idb", idb);
 
+		//レビューを取得してセット
+		ArrayList<reviewDataBeans> reviewDataBeansList = ReviewDAO.getReviewDataBeansListByItemId(itemId);
+
+		request.setAttribute("reviewDataBeansList", reviewDataBeansList);
+
+		//アイテム詳細画面にフォワード
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/item.jsp");
 		dispatcher.forward(request, response);
-
 	}
 
 	/**

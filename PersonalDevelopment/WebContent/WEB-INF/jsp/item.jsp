@@ -55,7 +55,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col text-center">
-					<img src="image/${idb.fileName}" class="rounded mx-auto d-block" alt="">
+					<img src="image/${idb.fileName}" class="rounded mx-auto d-block img-fluid" alt="">
 				</div>
 				<div class="col">
 					<div class="row">
@@ -73,6 +73,11 @@
 					<div class="row">
 						<h6 class="col mx-auto mt-5 ">商品追加日</h6>
 						<h6 class="col mx-auto mt-5 "><fmt:formatDate value="${idb.addDate}" pattern="yyyy年MM月dd日" /></h6>
+					</div>
+					<div class="row my-4">
+						<span class="col-3 mx-auto"></span>
+						<a class="btn btn-primary col-6 mx-auto" href="http://localhost:8080/PersonalDevelopment/ReviewAdd?itemId=${idb.itemId}" role="button">カスタマーレビューを書く</a>
+						<span class="col-3 mx-auto"></span>
 					</div>
 				</div>
 			</div>
