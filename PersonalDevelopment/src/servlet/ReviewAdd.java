@@ -75,6 +75,10 @@ public class ReviewAdd extends HttpServlet {
 
 		request.setAttribute("idb", idb);
 
+		//アイテムの評価平均を取得してセット
+		String itemAvg = ReviewDAO.getItemRatingAverage(reviewItemId);
+		request.setAttribute("itemAvg", itemAvg);
+
 		//アイテム詳細画面にフォワード
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/item.jsp");
 		dispatcher.forward(request, response);

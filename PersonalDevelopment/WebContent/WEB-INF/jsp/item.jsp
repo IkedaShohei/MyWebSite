@@ -8,6 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+<link  rel="stylesheet" href="/PersonalDevelopment/css/NewFile.css">
 <title>商品詳細</title>
 </head>
 <body>
@@ -62,6 +63,10 @@
 					<div class="row">
 						<h4 class="col">商品名</h4>
 						<h4 class="col">${idb.name}</h4>
+					</div>
+					<div class="star-rating">
+						<div class="star-rating-front" style="width: ${itemAvg}%">★★★★★</div>
+						<div class="star-rating-back">★★★★★</div>
 					</div>
 					<div class="row">
 						<h5 class="col mt-4">値段</h5>
@@ -137,13 +142,9 @@
 				<div class="container col-2"></div>
 			</div>
 		</div>
-
-
-
 	</div>
 
-
-	<footer class="bg-light">
+	<footer class="fixed-bottom bg-light">
 	    <div class="container text-center">
 	      	<p>Made by ikeda</p>
 	    </div>

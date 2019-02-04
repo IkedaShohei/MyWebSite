@@ -51,11 +51,13 @@ public class ReviewDAO {
 		try {
 			conn =DBmanager.getConnection();
 
+			//日付の新しい順がデフォルトの表示
 			String sql = "SELECT *"
 					+ " FROM review"
 					+ " JOIN user"
 					+ " ON review.reviewer_id = user.user_id"
-					+ " WHERE review.review_item_id = ?";
+					+ " WHERE review.review_item_id = ?"
+					+ " ORDER BY review.create_date DESC";
 
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, reviewItemId);
@@ -100,11 +102,10 @@ public class ReviewDAO {
 		Connection conn = null;
 		String rayingAvg = null;
 
-
 		try {
 			conn = DBmanager.getConnection();
 
-			String sql ="SELECT AVG(rating)"
+			String sql ="SELECT AVG(rating) * 20"
 					+ " AS avg"
 					+ " FROM review"
 					+ " WHERE review_item_id = ?";
@@ -117,7 +118,7 @@ public class ReviewDAO {
 				rayingAvg = String.format("%.1f", rs.getDouble("avg"));
 			}
 
-			System.out.println(rayingAvg);
+			System.out.println("rating avg " + rayingAvg);
 
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
