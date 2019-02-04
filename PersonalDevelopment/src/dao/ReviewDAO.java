@@ -1,4 +1,4 @@
-package servlet;
+package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -135,6 +135,78 @@ public class ReviewDAO {
 		}
 
 		return rayingAvg;
+	}
+
+	/**選らばれた並び替えの項目に応じて並べ替えをしたレビューのリストを渡すDAO**/
+
+	public static ArrayList<reviewDataBeans> getSortReviewList(int itemId, String sortMenu) {
+		Connection conn = null;
+		ArrayList<reviewDataBeans> reviewDataBeansList = null;
+
+		try {
+			conn = DBmanager.getConnection();
+
+			String sql ="SELECT *"
+					+ " FROM review"
+					+ " JOIN user"
+					+ " ON review.reviewer_id = user.user_id"
+					+ " WHERE review.review_item_id = ?";
+
+			//もし選ばれたのがdateNew（日付が新しい順）だったら
+			if(sortMenu.equals("dateNew")){
+				sql += " ORDER BY review.create_date DESC";
+			}
+
+			//もし選ばれたのがdateOld（日付が古い順）だったら
+			if(sortMenu.equals("dateOld")){
+				sql += " ORDER BY review.create_date ASC";
+			}
+
+			//もし選ばれたのがevaluationHigh（評価が高い順）だったら
+			if(sortMenu.equals("evaluationHigh")){
+				sql += " ORDER BY review.rating DESC";
+			}
+
+			//もし選ばれたのがevaluationLow（評価が低い順）だったら
+			if(sortMenu.equals("evaluationLow")){
+				sql += " ORDER BY review.rating ASC";
+			}
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, itemId);
+
+			ResultSet rs = ps.executeQuery();
+
+			reviewDataBeansList = new ArrayList<reviewDataBeans>();
+
+			while(rs.next()) {
+				reviewDataBeans rdb = new reviewDataBeans();
+				rdb.setReviewId(rs.getInt("review_id"));
+				rdb.setReviewerId(rs.getInt("reviewer_id"));
+				rdb.setReviewItemId(rs.getInt("review_item_id"));
+				rdb.setRating(rs.getInt("rating"));
+				rdb.setReviewTitle(rs.getString("review_title"));
+				rdb.setReviewContent(rs.getString("review_content"));
+				rdb.setCreateDate(rs.getDate("create_date"));
+				rdb.setReviewerName(rs.getString("user_name"));
+
+				reviewDataBeansList.add(rdb);
+			}
+
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}finally {
+			//closeメソッドでデータベースを切断する
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+		}
+		return reviewDataBeansList;
 	}
 
 

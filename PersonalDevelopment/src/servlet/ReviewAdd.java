@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import beans.ItemDataBeans;
 import beans.reviewDataBeans;
 import dao.ItemDAO;
+import dao.ReviewDAO;
 
 /**
  * Servlet implementation class ReviewAdd

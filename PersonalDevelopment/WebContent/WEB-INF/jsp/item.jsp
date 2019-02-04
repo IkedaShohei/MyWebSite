@@ -9,6 +9,10 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 <link  rel="stylesheet" href="/PersonalDevelopment/css/NewFile.css">
+
+<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+
 <title>商品詳細</title>
 </head>
 <body>
@@ -93,6 +97,22 @@
 		<div class="container mb-5">
 			<div class="row center">
 				<h5 class="text-center col s12 light m-5 border-bottom py-3">カスタマーレビュー</h5>
+			</div>
+			<div class="row">
+				<span class="col"></span>
+				<span class="col"></span>
+				<form id="submit_form" class="col" action="http://localhost:8080/PersonalDevelopment/Item" method="post">
+					<input type="hidden" name="item_id" value="${idb.itemId}">
+					<div class="form-group">
+						<!-- <label for="exampleSelect1exampleFormControlSelect1">並べ替え</label> -->
+						<select id="submit_select" class="form-control" name="sort">
+							<option value="dateNew">日付が新しい順</option>
+					 		<option value="dateOld">日付が古い順</option>
+							<option value="evaluationHigh">評価が高い順</option>
+							<option value="evaluationLow">評価が悪い順</option>
+						</select>
+					</div>
+				</form>
 			</div>
 			<div class="row center">
 				<div class="container col-2"></div>

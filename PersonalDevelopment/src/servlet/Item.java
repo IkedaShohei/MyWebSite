@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import beans.ItemDataBeans;
 import beans.reviewDataBeans;
 import dao.ItemDAO;
+import dao.ReviewDAO;
 
 /**
  * Servlet implementation class Item
@@ -74,10 +75,29 @@ public class Item extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 
-		//レビューソート機能を実装予定
+		//レビューソート機能
+
+		String itemIdStr = request.getParameter("item_id");
+		int itemId = Integer.parseInt(itemIdStr);
+		String sortMenu = request.getParameter("sort");
+
+		//アイテム情報を取得してセット
+		ItemDAO itemDao = new ItemDAO();
+		ItemDataBeans idb = itemDao.selectByItemId(itemId);
+		request.setAttribute("idb", idb);
+
+		//アイテムの評価平均を取得してセット
+		String itemAvg = ReviewDAO.getItemRatingAverage(itemId);
+		request.setAttribute("itemAvg", itemAvg);
+
+		//ソートされたレビューリストを取得してセット
+		ArrayList<reviewDataBeans> reviewDataBeansList = ReviewDAO.getSortReviewList(itemId, sortMenu);
+		request.setAttribute("reviewDataBeansList", reviewDataBeansList);
+
+		//アイテム詳細画面にフォワード
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/item.jsp");
+		dispatcher.forward(request, response);
 
 	}
 
