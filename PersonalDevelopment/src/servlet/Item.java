@@ -56,6 +56,10 @@ public class Item extends HttpServlet {
 
 		request.setAttribute("idb", idb);
 
+		//アイテムの評価平均を取得してセット
+		String itemAvg = ReviewDAO.getItemRatingAverage(itemId);
+		request.setAttribute("itemAvg", itemAvg);
+
 		//レビューを取得してセット
 		ArrayList<reviewDataBeans> reviewDataBeansList = ReviewDAO.getReviewDataBeansListByItemId(itemId);
 
@@ -72,6 +76,9 @@ public class Item extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+
+		//レビューソート機能を実装予定
+
 	}
 
 }

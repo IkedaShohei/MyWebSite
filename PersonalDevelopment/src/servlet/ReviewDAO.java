@@ -51,7 +51,11 @@ public class ReviewDAO {
 		try {
 			conn =DBmanager.getConnection();
 
-			String sql = "SELECT * FROM review WHERE review_item_id = ?";
+			String sql = "SELECT *"
+					+ " FROM review"
+					+ " JOIN user"
+					+ " ON review.reviewer_id = user.user_id"
+					+ " WHERE review.review_item_id = ?";
 
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, reviewItemId);
@@ -68,6 +72,7 @@ public class ReviewDAO {
 				rdb.setReviewTitle(rs.getString("review_title"));
 				rdb.setReviewContent(rs.getString("review_content"));
 				rdb.setCreateDate(rs.getDate("create_date"));
+				rdb.setReviewerName(rs.getString("user_name"));
 
 				reviewDataBeansList.add(rdb);
 
@@ -88,6 +93,47 @@ public class ReviewDAO {
             }
 		}
 		return reviewDataBeansList;
+	}
+
+	public static String getItemRatingAverage(int itemId) {
+		// TODO 自動生成されたメソッド・スタブ
+		Connection conn = null;
+		String rayingAvg = null;
+
+
+		try {
+			conn = DBmanager.getConnection();
+
+			String sql ="SELECT AVG(rating)"
+					+ " AS avg"
+					+ " FROM review"
+					+ " WHERE review_item_id = ?";
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setDouble(1, itemId);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				rayingAvg = String.format("%.1f", rs.getDouble("avg"));
+			}
+
+			System.out.println(rayingAvg);
+
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}finally {
+			//closeメソッドでデータベースを切断する
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+		}
+
+		return rayingAvg;
 	}
 
 

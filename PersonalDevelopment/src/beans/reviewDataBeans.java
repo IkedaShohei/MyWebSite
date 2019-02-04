@@ -12,6 +12,11 @@ public class reviewDataBeans {
 	private String reviewContent;
 	private Date createDate;
 
+	//レビューリストを表示する際の結合後に使うフィールド
+	private String reviewerName;
+
+
+
 
 	public int getReviewId() {
 		return reviewId;
@@ -54,6 +59,12 @@ public class reviewDataBeans {
 	}
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+	public String getReviewerName() {
+		return reviewerName;
+	}
+	public void setReviewerName(String reviewerName) {
+		this.reviewerName = reviewerName;
 	}
 
 

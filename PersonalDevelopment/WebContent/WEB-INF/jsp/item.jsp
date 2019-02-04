@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 <title>商品詳細</title>
 </head>
 <body>
@@ -59,8 +60,8 @@
 				</div>
 				<div class="col">
 					<div class="row">
-						<h3 class="col">商品名</h3>
-						<h3 class="col">${idb.name}</h3>
+						<h4 class="col">商品名</h4>
+						<h4 class="col">${idb.name}</h4>
 					</div>
 					<div class="row">
 						<h5 class="col mt-4">値段</h5>
@@ -84,8 +85,65 @@
 		</div>
 	</div>
 
+		<div class="container mb-5">
+			<div class="row center">
+				<h5 class="text-center col s12 light m-5 border-bottom py-3">カスタマーレビュー</h5>
+			</div>
+			<div class="row center">
+				<div class="container col-2"></div>
+				<div class="container col-8">
+					<c:forEach var="rdb" items="${reviewDataBeansList}">
+						<P class=""><i class="far fa-user"></i>${rdb.reviewerName}</P>
+						<div class="row mb-3">
+							<!-- 評価１の時 -->
+							<c:if test="${rdb.rating == 1}">
+								<span class="col-2 text-warning">★☆☆☆☆</span>
+								<span class="col-6">${rdb.reviewTitle}</span>
+								<span class="col-3"></span>
+							</c:if>
+							<!-- 評価２の時 -->
+							<c:if test="${rdb.rating == 2}">
+								<span class="col-2 text-warning">★★☆☆☆</span>
+								<span class="col-6">${rdb.reviewTitle}</span>
+								<span class="col-3"></span>
+							</c:if>
+							<!-- 評価３の時 -->
+							<c:if test="${rdb.rating == 3}">
+								<span class="col-2 text-warning">★★★☆☆</span>
+								<span class="col-6">${rdb.reviewTitle}</span>
+								<span class="col-3"></span>
+							</c:if>
+							<!-- 評価４の時 -->
+							<c:if test="${rdb.rating == 4}">
+								<span class="col-2 text-warning">★★★★☆</span>
+								<span class="col-6">${rdb.reviewTitle}</span>
+								<span class="col-3"></span>
+							</c:if>
+							<!-- 評価５の時 -->
+							<c:if test="${rdb.rating == 5}">
+								<span class="col-2 text-warning">★★★★★</span>
+								<span class="col-6">${rdb.reviewTitle}</span>
+								<span class="col-3"></span>
+							</c:if>
+						</div>
+						<div class="mb-3">
+							<span><fmt:formatDate value="${rdb.createDate}" pattern="yyyy年MM月dd日" /></span>
+						</div>
+						<div class="mb-3">
+							<span>${rdb.reviewContent}</span>
+						</div>
+						<br>
+					</c:forEach>
+				<div class="container col-2"></div>
+			</div>
+		</div>
 
-	<footer class="fixed-bottom bg-light">
+
+
+	</div>
+
+
+	<footer class="bg-light">
 	    <div class="container text-center">
 	      	<p>Made by ikeda</p>
 	    </div>
