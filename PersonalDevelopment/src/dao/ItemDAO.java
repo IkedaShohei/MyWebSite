@@ -24,9 +24,9 @@ public class ItemDAO {
 			//全てのアイテムを取ってくるsql文
 			String sql = "SELECT * FROM item";
 
-			//もしsearchWordに文字が入っていたら
+			//もしsearchWordに文字が入っていたらitemのnameとdetailから部分一致検索
 			if (searchWord.length() != 0) {
-				sql += " WHERE name LIKE '%"+searchWord+"%'";
+				sql += " WHERE name LIKE '%"+searchWord+"%' OR detail LIKE '%"+searchWord+"%'";
 			}
 
 			Statement st = conn.createStatement();
