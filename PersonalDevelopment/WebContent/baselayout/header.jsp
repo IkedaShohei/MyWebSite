@@ -12,7 +12,7 @@
 					<c:choose>
 						<c:when test="${udb == null}">
 							<li class="nav-item">
-				        		<a class="nav-link" href="http://localhost:8080/PersonalDevelopment/Regist"><i class="fas fa-plus"></i></a>
+				        		<a class="nav-link" href="http://localhost:8080/PersonalDevelopment/Regist"><i class="fas fa-plus">　</i></a>
 				      		</li>
 				      	</c:when>
 				      	<c:when test="${udb != null}">

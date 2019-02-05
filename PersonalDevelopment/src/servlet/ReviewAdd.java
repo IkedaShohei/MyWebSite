@@ -55,9 +55,9 @@ public class ReviewAdd extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 
-		String reviewerIdStr = request.getParameter("itemId");
+		String reviewerIdStr = request.getParameter("reviewerId");
 		int reviewerId = Integer.parseInt(reviewerIdStr);
-		String reviewItemIdStr = request.getParameter("reviewerId");
+		String reviewItemIdStr = request.getParameter("itemId");
 		int reviewItemId= Integer.parseInt(reviewItemIdStr);
 		String ratingStr = request.getParameter("rating");
 		int raiting =Integer.parseInt(ratingStr);
@@ -80,9 +80,8 @@ public class ReviewAdd extends HttpServlet {
 		String itemAvg = ReviewDAO.getItemRatingAverage(reviewItemId);
 		request.setAttribute("itemAvg", itemAvg);
 
-		//アイテム詳細画面にフォワード
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/item.jsp");
-		dispatcher.forward(request, response);
+		//アイテム詳細画面にitemidを持たせてリダイレクト
+		response.sendRedirect("http://localhost:8080/PersonalDevelopment/Item?item_id=" + reviewItemIdStr);
 
 	}
 

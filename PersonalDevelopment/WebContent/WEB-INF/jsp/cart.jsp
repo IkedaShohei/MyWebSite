@@ -14,7 +14,7 @@
 				<h5 class="text-center col s12 light m-5">買い物かご</h5>
 			</div>
 			<form action="http://localhost:8080/PersonalDevelopment/ItemDeleteInCart" method="POST">
-				<div class="row mb-5">
+				<div class="row mb-4">
 					<div class="col-md-1"></div>
 					<button class="btn-primary rounded-pill col-md-4 text-center">削除</button>
 					<div class="col-md-1"></div>
@@ -22,10 +22,16 @@
 					<a href="http://localhost:8080/PersonalDevelopment/Buy" class="btn-primary rounded-pill col-md-4 text-center">レジに進む</a>
 					<div class="col-md-1"></div>
 				</div>
-
-					<div class="row center">
-						<p class="text-center col s12 light m-5">${cartActionMessage}</p>
+				<div class="row">
+					<span class="col-10"></span>
+					<div class="col-1">
+						<a href="javascript:void(0)" class="" onclick="javascript:history.back()">戻る</a>
 					</div>
+					<span class="col-1"></span>
+				</div>
+				<div class="row center">
+					<p class="text-center col s12 light mt-3 mb-5">${cartActionMessage}</p>
+				</div>
 
 				<div class="row">
 					<c:forEach var="idb" items="${cart}" varStatus="status">
@@ -45,7 +51,6 @@
 				</div>
 			</form>
 		</div>
-
 
 	<footer class="fixed-bottom bg-light">
 	    <div class="container text-center">
