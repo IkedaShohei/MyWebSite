@@ -196,7 +196,8 @@ public class ItemDAO {
 		try {
 			conn = DBmanager.getConnection();
 
-			String sql = "SELECT * FROM item WHERE add_user_id = ?";
+			String sql = "SELECT * FROM item WHERE add_user_id = ?"
+					+ " ORDER BY add_time DESC";
 
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, userId);
@@ -338,8 +339,9 @@ public class ItemDAO {
 		PreparedStatement st = null;
 		try {
 			conn = DBmanager.getConnection();
-			st = conn.prepareStatement("select count(*) as cnt from item where name like ?");
+			st = conn.prepareStatement("select count(*) as cnt from item where name LIKE ? OR detail LIKE ?");
 			st.setString(1, "%" + searchWord + "%");
+			st.setString(2, "%" + searchWord + "%");
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
 				coung = Double.parseDouble(rs.getString("cnt"));
