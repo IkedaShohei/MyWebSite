@@ -160,7 +160,7 @@
 	</div>
 
 
-	<footer class="fixed-bottom bg-light">
+	<footer class="bg-light">
 	    <div class="container text-center">
 	      	<p>Made by ikeda</p>
 	    </div>

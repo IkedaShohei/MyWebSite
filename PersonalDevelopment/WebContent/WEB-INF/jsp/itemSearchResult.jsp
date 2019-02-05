@@ -12,7 +12,7 @@
  	<div class="container">
  		<form action="http://localhost:8080/PersonalDevelopment/itemSearchResult" method="post">
  			<div class="form-group">
-	   			<label for="exampleInputRetrieval">検索</label>
+	   			<label for="exampleInputRetrieval"><i class="fas fa-search"></i> 検索</label>
 	    		<input type="text" class="form-control" name="searchWord" value="${searchWord}" placeholder="検索">
 	    		<small class="text-muted">欲しい商品を検索してください。</small>
 	  		</div>

@@ -18,7 +18,7 @@
 			<div class="row center mb-4">
 				<div class="col-10"></div>
 				<input type="hidden" name="itemId" value="${idb.itemId}">
-				<button type="submit" class="btn btn-outline-danger col-2">かごに追加</button>
+				<button type="submit" class="btn btn-outline-danger col-2"><i class="fas fa-cart-plus"></i> かごに追加</button>
 			</div>
 		</form>
 
@@ -50,7 +50,7 @@
 					</div>
 					<div class="row my-4">
 						<span class="col-3 mx-auto"></span>
-						<a class="btn btn-primary col-6 mx-auto" href="http://localhost:8080/PersonalDevelopment/ReviewAdd?itemId=${idb.itemId}" role="button">カスタマーレビューを書く</a>
+						<a class="btn btn-primary col-6 mx-auto" href="http://localhost:8080/PersonalDevelopment/ReviewAdd?itemId=${idb.itemId}" role="button">カスタマーレビューを書く <i class="fas fa-pencil-alt"></i></a>
 						<span class="col-3 mx-auto"></span>
 					</div>
 				</div>

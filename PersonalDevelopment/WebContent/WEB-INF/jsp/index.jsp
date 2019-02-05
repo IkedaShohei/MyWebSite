@@ -20,9 +20,9 @@
 			<div class="col-lg-8 mx-auto mb-5">
 				<div class="row">
 					<p class="col-sm-2"></p>
-					<a class="col-sm-3 btn btn-outline-primary" href="http://localhost:8080/PersonalDevelopment/itemSearchResult" role="button">商品を探す</a>
+					<a class="col-sm-3 btn btn-outline-primary" href="http://localhost:8080/PersonalDevelopment/itemSearchResult" role="button"><i class="fas fa-search"></i> 商品を探す</a>
 					<p class="col-sm-2"></p>
-					<a class="col-sm-3 btn btn-outline-primary" href="http://localhost:8080/PersonalDevelopment//ItemAdd" role="button">商品を出品する</a>
+					<a class="col-sm-3 btn btn-outline-primary" href="http://localhost:8080/PersonalDevelopment//ItemAdd" role="button"><i class="fas fa-gift"></i> 商品を出品する</a>
 					<p class="col-sm-2"></p>
 				</div>
 			</div>
