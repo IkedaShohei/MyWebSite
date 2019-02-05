@@ -8,7 +8,7 @@
 <title>商品詳細</title>
 </head>
 <body>
-<jsp:include page="/baselayout/header.jsp" />
+	<jsp:include page="/baselayout/header.jsp" />
 
  	<div class="container">
 		<div class="row center">

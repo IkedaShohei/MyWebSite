@@ -7,7 +7,7 @@
 <title>ホーム</title>
 </head>
 <body>
-<jsp:include page="/baselayout/header.jsp" />
+	<jsp:include page="/baselayout/header.jsp" />
 
 	<header class="container my-auto text-center">
 		<div class="row">

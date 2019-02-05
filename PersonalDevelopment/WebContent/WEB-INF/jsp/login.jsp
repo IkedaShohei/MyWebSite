@@ -7,28 +7,7 @@
 <title>ログイン</title>
 </head>
 <body>
-
-
-	<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
-		<div class="container">
-			<div class="collapse navbar-collapse" id="navbarNav">
-				<div class="mr-auto">
-					<a class="nav-link" href="http://localhost:8080/PersonalDevelopment/index">Home </a>
-				</div>
-				<ul class="navbar-nav">
-		      		<li class="nav-item">
-		        		<a class="nav-link" href="http://localhost:8080/PersonalDevelopment/Regist">新規登録</a>
-		      		</li>
-		      		<li class="nav-item">
-		        		<a class="nav-link" href="http://localhost:8080/PersonalDevelopment/Cart">カート</a>
-		      		</li>
-		      		<li class="nav-item">
-		        		<a class="nav-link" href="http://localhost:8080/PersonalDevelopment/Login">ログイン</a>
-		      		</li>
-		    	</ul>
-		    </div>
-		</div>
- 	</nav>
+	<jsp:include page="/baselayout/header.jsp" />
 
  	<div class="container">
 		<div class="row center">
