@@ -40,10 +40,8 @@
 						 	<img class="card-img-top" src="image/${idb.fileName}" alt="No image">
 						 	</a>
 						 	<div class="card-body">
-						 		<div class="row">
-							  		<p class="col-5">${idb.name}</p>
-							  		<p class="col-7">${idb.price}円</p>
-							  	</div>
+							  	<p class="">${idb.name}</p>
+							  	<p class="">${idb.price}円</p>
 							    <span><input type="checkbox" name="delete_item_id_list" value="${idb.itemId}"> <label for="$">削除</label></span>
 							</div>
 						</div>
