@@ -27,26 +27,26 @@
 							<img src="image/${idb.fileName}" class="rounded mx-auto d-block img-fluid mb-2" alt="">
 							<p>全体的な評価</p>
 							<div class="evaluation">
-								<input id="star1" type="radio" name="rating" value="5" />
+								<input id="star1" type="radio" name="rating" value="5" required>
 							    <label for="star1"><span class="text">最高</span>★</label>
-							    <input id="star2" type="radio" name="rating" value="4" />
+							    <input id="star2" type="radio" name="rating" value="4" required>
 							    <label for="star2"><span class="text">良い</span>★</label>
-							    <input id="star3" type="radio" name="rating" value="3" />
+							    <input id="star3" type="radio" name="rating" value="3" required>
 							    <label for="star3"><span class="text">普通</span>★</label>
-							    <input id="star4" type="radio" name="rating" value="2" />
+							    <input id="star4" type="radio" name="rating" value="2" required>
 							    <label for="star4"><span class="text">悪い</span>★</label>
-							    <input id="star5" type="radio" name="rating" value="1" />
+							    <input id="star5" type="radio" name="rating" value="1" required>
 							    <label for="star5"><span class="text">最悪</span>★</label>
 							</div>
 							<div class="cp_form">
 								<div class="cp_group">
 									<div class="cp_tx">
 										<label class="title">レビュータイトル:</label>
-										<input class="large" type="text" name="reviewTitle" />
+										<input class="large" type="text" name="reviewTitle" required>
 									</div>
 									<div class="cp_textarea">
 										<label class="title">レビューを記入してください:</label>
-										<textarea class="small" name="reviewContent" cols="20" rows="5" ></textarea>
+										<textarea class="small" name="reviewContent" cols="20" rows="5"  required></textarea>
 									</div>
 								</div>
 							</div>
