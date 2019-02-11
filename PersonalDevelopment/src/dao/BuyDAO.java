@@ -12,7 +12,7 @@ import beans.BuyDataBeans;
 
 public class BuyDAO {
 
-	public static int insurtBuy(BuyDataBeans bdb) {
+	public static int insurtBuy(BuyDataBeans bdb) throws SQLException {
 		// TODO 自動生成されたメソッド・スタブ
 		Connection conn = null;
 		int autoIncrementKey =-1;
@@ -44,6 +44,7 @@ public class BuyDAO {
 		} catch (SQLException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
+			throw new SQLException(e);
 		}finally{
 			//データベースを切断する
 			if(conn != null) {

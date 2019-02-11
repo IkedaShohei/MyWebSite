@@ -50,35 +50,42 @@ public class BuyResult extends HttpServlet {
 		//同じくセッションスコープに入ってるbdb(購入データ)をデータベース追加用で取得する
 		HttpSession session = request.getSession();
 
-		ArrayList<ItemDataBeans> cart = (ArrayList<ItemDataBeans>)session.getAttribute("cart");
-		BuyDataBeans bdb = (BuyDataBeans)session.getAttribute("bdb");
+		try {
+			ArrayList<ItemDataBeans> cart = (ArrayList<ItemDataBeans>)session.getAttribute("cart");
+			BuyDataBeans bdb = (BuyDataBeans)session.getAttribute("bdb");
 
-		//購入したデータをインサートしてインサートした購入情報のIDを戻り値で返すDAOを作る
-		int buyId = BuyDAO.insurtBuy(bdb);
+			//購入したデータをインサートしてインサートした購入情報のIDを戻り値で返すDAOを作る
+			int buyId = BuyDAO.insurtBuy(bdb);
 
-		//戻ってきたIDを元に購入詳細も登録していく
-		for (ItemDataBeans cartInItem : cart){
-			BuyDetailDataBeans bddb = new BuyDetailDataBeans();
-			bddb.setBuyId(buyId);
-			bddb.setItemId(cartInItem.getItemId());
-			BuyDetailDAO.insurtBuyDetail(bddb);
+			//戻ってきたIDを元に購入詳細も登録していく
+			for (ItemDataBeans cartInItem : cart){
+				BuyDetailDataBeans bddb = new BuyDetailDataBeans();
+				bddb.setBuyId(buyId);
+				bddb.setItemId(cartInItem.getItemId());
+				BuyDetailDAO.insurtBuyDetail(bddb);
+			}
+
+			//購入完了ページ表示用の購入データBeans
+			BuyDataBeans resultBDB = BuyDAO.getBuyDataBeansByBuyId(buyId);
+			request.setAttribute("resultBDB", resultBDB);
+
+			//購入商品情報
+			ArrayList<ItemDataBeans> buyIDBList = BuyDetailDAO.getItemDataBeansListByBuyId(buyId);
+			request.setAttribute("buyIDBList", buyIDBList);
+
+			//セッションに保存されているインスタンスを削除
+			session.removeAttribute("cart");
+			session.removeAttribute("bdb");
+
+			//購入完了ページ（buyResult.jsp）に移動にフォワード
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/buyResult.jsp");
+	        dispatcher.forward(request, response);
+
+		}catch(Exception e){
+			//例外を検出したらエラーページに遷移
+			e.printStackTrace();
+			response.sendRedirect("http://localhost:8080/PersonalDevelopment");
 		}
-
-		//購入完了ページ表示用の購入データBeans
-		BuyDataBeans resultBDB = BuyDAO.getBuyDataBeansByBuyId(buyId);
-		request.setAttribute("resultBDB", resultBDB);
-
-		//購入商品情報
-		ArrayList<ItemDataBeans> buyIDBList = BuyDetailDAO.getItemDataBeansListByBuyId(buyId);
-		request.setAttribute("buyIDBList", buyIDBList);
-
-		//セッションに保存されているインスタンスを削除
-		session.removeAttribute("cart");
-		session.removeAttribute("bdb");
-
-		//購入完了ページ（buyResult.jsp）に移動にフォワード
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/buyResult.jsp");
-        dispatcher.forward(request, response);
 
 	}
 
