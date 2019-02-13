@@ -17,6 +17,7 @@
 	    		<small class="text-muted">欲しい商品を検索してください。</small>
 	  		</div>
  		</form>
+
 		<div class="center">
 			<h5 class="text-center">検索結果</h5>
 			<c:if test="${itemCount != null}">

@@ -343,4 +343,46 @@ public class ItemDAO {
 			}
 		}
 	}
+
+	public static List<ItemDataBeans> defaultSearch() {
+		Connection conn = null;
+		List<ItemDataBeans> DefaultItemList = new ArrayList<>();
+
+		try {
+			conn = DBmanager.getConnection();
+
+			String sql ="SELECT * FROM item";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				int itemId = rs.getInt("item_id");
+				String name = rs.getString("name");
+				String detail = rs.getString("detail");
+				int price = rs.getInt("price");
+				int stock = rs.getInt("stock");
+				String fileName = rs.getString("file_name");
+				int userId = rs.getInt("add_user_id");
+
+				ItemDataBeans idb = new ItemDataBeans(itemId, name, detail, price, stock, fileName, userId);
+				DefaultItemList.add(idb);
+			}
+
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO 自動生成された catch ブロック
+					e.printStackTrace();
+				}
+			}
+		}
+
+
+		return DefaultItemList;
+	}
 }

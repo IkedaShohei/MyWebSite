@@ -47,6 +47,11 @@ public class ItemSearchResult extends HttpServlet {
 			return;
 		}
 
+		List<ItemDataBeans> DefaultItemList = ItemDAO.defaultSearch();
+
+		request.setAttribute("itemList", DefaultItemList);
+
+
 		//itemSearchResult.jspにフォワード
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/itemSearchResult.jsp");
         dispatcher.forward(request, response);
