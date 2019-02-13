@@ -113,21 +113,22 @@ public class ItemDAO {
 
 
 
-	public static void insertItem(String itemName,String itemDetail,int itemPrice,String fileName,int userId) {
+	public static void insertItem(String itemName,String itemDetail,int itemPrice,int itemStock, String fileName,int userId) {
 		Connection conn= null;
 
 		try {
 			conn = DBmanager.getConnection();
 
-			String sql = "INSERT INTO item(name,detail,price,file_name,add_user_id,add_time)"
-			+ " VALUE(?,?,?,?,?,now());";
+			String sql = "INSERT INTO item(name,detail,price,stock,file_name,add_user_id,add_time)"
+			+ " VALUE(?,?,?,?,?,?,now());";
 
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, itemName);
 			ps.setString(2, itemDetail);
 			ps.setInt(3, itemPrice);
-			ps.setString(4, fileName);
-			ps.setInt(5,userId);
+			ps.setInt(4, itemStock);
+			ps.setString(5, fileName);
+			ps.setInt(6,userId);
 			ps.executeUpdate();
 
 		} catch (SQLException e) {

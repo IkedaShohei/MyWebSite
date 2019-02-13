@@ -63,6 +63,8 @@ public class ItemAdd extends HttpServlet {
 		String itemDetail = request.getParameter("itemDetail");
 		String itemPriceStr = request.getParameter("itemPrice");
 		int itemPrice = Integer.parseInt(itemPriceStr);
+		String itemStockStr = request.getParameter("itemStock");
+		int itemStock = Integer.parseInt(itemStockStr);
 		String userIdStr = request.getParameter("userId");
 		int userId = Integer.parseInt(userIdStr);
 
@@ -72,7 +74,7 @@ public class ItemAdd extends HttpServlet {
 
 		part.write(Helper.IMG_PATH + name);
 
-		ItemDAO.insertItem(itemName, itemDetail, itemPrice, name, userId);
+		ItemDAO.insertItem(itemName, itemDetail, itemPrice, itemStock, name, userId);
 
 //		//商品の追加確認画面実装時の画面表示に使用するBeans
 //		ItemDataBeans idb = new ItemDataBeans();

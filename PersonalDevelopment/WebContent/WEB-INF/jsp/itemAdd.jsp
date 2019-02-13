@@ -36,6 +36,11 @@
 								</div>
 								<div class="row">
 									<div class="input-field col s10 offset-s1 mb-3">
+										<input value="" name="itemStock" type="text" placeholder="在庫数" required>
+									</div>
+								</div>
+								<div class="row">
+									<div class="input-field col s10 offset-s1 mb-3">
 										<div class="custom-file">
 	   										<input type="file" value="" name="fileName" class="custom-file-input" aria-describedby="inputGroupFileAddon01">
 	   										<label class="custom-file-label" for="inputGroupFile01">商品の画像ファイルを選択してください</label>
