@@ -16,6 +16,7 @@ import beans.BuyDetailDataBeans;
 import beans.ItemDataBeans;
 import dao.BuyDAO;
 import dao.BuyDetailDAO;
+import dao.ItemDAO;
 
 /**
  * Servlet implementation class BuyResult
@@ -63,6 +64,8 @@ public class BuyResult extends HttpServlet {
 				bddb.setBuyId(buyId);
 				bddb.setItemId(cartInItem.getItemId());
 				BuyDetailDAO.insurtBuyDetail(bddb);
+			//在庫数を−１するDAO
+				ItemDAO.reduceStock(cartInItem.getItemId());
 			}
 
 			//購入完了ページ表示用の購入データBeans

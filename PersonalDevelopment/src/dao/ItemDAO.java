@@ -313,4 +313,33 @@ public class ItemDAO {
 		}
 		return coung;
 }
+
+	//購入した商品の在庫数を減らす
+	public static void reduceStock(int itemId) {
+		Connection conn = null;
+
+		try {
+			conn = DBmanager.getConnection();
+
+			String sql = "UPDATE item SET stock = stock-1 WHERE item_id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, itemId);
+			ps.executeUpdate();
+
+			System.out.println("Item stock reduce OK!!");
+
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO 自動生成された catch ブロック
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 }
