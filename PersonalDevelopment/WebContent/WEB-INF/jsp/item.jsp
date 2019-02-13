@@ -14,13 +14,15 @@
 		<div class="row center">
 			<h5 class="text-center col s12 light m-5">商品詳細</h5>
 		</div>
-		<form action="http://localhost:8080/PersonalDevelopment/ItemAddInCart" method="post">
-			<div class="row center mb-4">
-				<div class="col-10"></div>
-				<input type="hidden" name="itemId" value="${idb.itemId}">
-				<button type="submit" class="btn btn-outline-danger col-2"><i class="fas fa-cart-plus"></i> かごに追加</button>
-			</div>
-		</form>
+		<c:if test="${idb.stock > 0}">
+			<form action="http://localhost:8080/PersonalDevelopment/ItemAddInCart" method="post">
+				<div class="row center mb-4">
+					<div class="col-10"></div>
+					<input type="hidden" name="itemId" value="${idb.itemId}">
+					<button type="submit" class="btn btn-outline-danger col-2"><i class="fas fa-cart-plus"></i> かごに追加</button>
+				</div>
+			</form>
+		</c:if>
 
 		<div class="container">
 			<div class="row">
@@ -42,11 +44,17 @@
 						<h5 class="col mt-4">出品者名</h5>
 						<h5 class="col mt-4">${idb.addUserName}</h5>
 					</div>
-						<h4 class="col mt-4">商品詳細</h4>
-						<h6>${idb.detail}</h6>
+					<h4 class="col mt-4">商品詳細</h4>
+					<h6>${idb.detail}</h6>
+					<c:if test="${idb.stock <= 0}">
+						<h4 class="text-danger mx-auto mt-3">在庫なし</h4>
+					</c:if>
+					<c:if test="${idb.stock > 0}">
+						<h4 class="text-primary mx-auto mt-3">在庫あり</h4>
+					</c:if>
 					<div class="row">
-						<h6 class="col mx-auto mt-5 ">商品追加日</h6>
-						<h6 class="col mx-auto mt-5 "><fmt:formatDate value="${idb.addDate}" pattern="yyyy年MM月dd日" /></h6>
+						<h6 class="col mx-auto mt-3">商品追加日</h6>
+						<h6 class="col mx-auto mt-3 "><fmt:formatDate value="${idb.addDate}" pattern="yyyy年MM月dd日" /></h6>
 					</div>
 					<div class="row my-4">
 						<span class="col-3 mx-auto"></span>
